@@ -46,12 +46,32 @@ const MatchCard = () => {
           return (
             <div
               key={cricMatch?.id}
-              className=" border-2 border-black p-10 text-center"
+              className=" border-2 border-black p-10 text-center "
             >
-              <div className="text-3xl">{cricMatch?.name}</div>
+              <div className="text-3xl font-bold flex justify-center">
+                <div className="flex flex-col items-center flex-1">
+                  <img
+                    className="w-20"
+                    src={cricMatch?.teamInfo[0]?.img}
+                    alt="Team 1 logo"
+                  />
+                  <p> {cricMatch?.teamInfo[0]?.name} </p>
+                </div>
+                <div className="flex flex-1 justify-center">
+                  <img className="w-24" src="./vs image.jpg" alt="vs logo" />
+                </div>
+                <div className="flex flex-col items-center flex-1">
+                  <img
+                    className="w-20"
+                    src={cricMatch?.teamInfo[1]?.img}
+                    alt="Team 1 logo"
+                  />
+                  <p> {cricMatch?.teamInfo[1]?.name} </p>
+                </div>
+              </div>
 
               <div className="font-bold">
-                <p className="p-4">{matchTime}</p>
+                <p className="p-4 text-2xl">{matchTime}</p>
 
                 <button className="text-blue-400 hover:scale-125">
                   Show Match Details
