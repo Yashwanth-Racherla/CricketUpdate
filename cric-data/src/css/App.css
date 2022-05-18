@@ -1,7 +1,7 @@
-.show-match-details-popup {
+.show-popUp {
   @apply bg-black bg-opacity-80 fixed z-10 w-full h-full top-0 left-0;
 }
-.show-match-details {  
+.show-popUp-data{  
   @apply bg-gradient-to-r from-violet-500 to-fuchsia-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 text-sm
   w-4/5 max-w-[400px] sm:w-auto sm:min-w-[400px] ;
 }
@@ -10,11 +10,11 @@
 }
 
 .match-data {
-  @apply border-[1px] border-black p-5 m-2 text-center font-semibold sm:text-xl md:text-base md:w-[45%] lg:w-[30%];
+  @apply border-[1px] border-black p-5 m-2 text-center font-semibold md:text-xl md:text-base md:w-[45%] lg:w-[30%];
 }
 
-.close-match-details {
-  @apply cursor-pointer hover:scale-110 text-3xl absolute top-0 right-[2%];
+.close-popUp{
+  @apply text-red-500 hover:scale-110 text-3xl absolute top-0 right-[2%];
 }
 
 .team-vs-team {
