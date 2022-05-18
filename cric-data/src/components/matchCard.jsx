@@ -62,7 +62,7 @@ const MatchCard = () => {
   // };
 
   //  ====================================================================
-  //  showMatchData() function called on show Match Details button element
+  //  showMatchData() function called on jsx button element
   //  ====================================================================
 
   const showMatchData = async (id) => {
@@ -76,13 +76,16 @@ const MatchCard = () => {
   };
 
   //  ====================================================================
-  //  closeMatchData() function called on close Match Details button element
+  //  closeMatchData() function called on jsx button element
   //  ====================================================================
   const closeMatchData = () => {
     setShowMatchDataPopup(false);
     setShowMatchScoreCardPopup(false);
   };
 
+  //  ====================================================================
+  //  showMatchScoreCard() function called on jsx button element
+  //  ====================================================================
   const showMatchScoreCard = async (id) => {
     const matchScoreCardApiData = await fetch(
       `https://api.cricapi.com/v1/match_scorecard?apikey=${apiKey}&offset=0&id=${id}`
@@ -90,7 +93,7 @@ const MatchCard = () => {
     await matchScoreCardApiData.json().then((res) => {
       setCricMatchScoreCard(res.data);
       setShowMatchScoreCardPopup(true);
-      // console.log(res.data);
+      console.log(res.data);
     });
   };
 
@@ -98,10 +101,18 @@ const MatchCard = () => {
     <>
       {showMatchScoreCardPopup && (
         <div className="show-popUp">
-          <div className="show-popUp-data">hello world</div>
-          <button className="close-popUp">
-            <FontAwesomeIcon icon={faXmark} onClick={() => closeMatchData()} />
-          </button>
+          <div className="show-popUp-data">
+            <p>
+              {cricMatchScoreCard?.score[0]?.inning?.replace("Inning 1", "")}
+            </p>
+
+            <button className="close-popUp">
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => closeMatchData()}
+              />
+            </button>
+          </div>
         </div>
       )}
 
