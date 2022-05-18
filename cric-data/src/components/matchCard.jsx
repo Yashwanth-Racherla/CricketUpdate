@@ -118,7 +118,7 @@ const MatchCard = () => {
 
           return (
             <div key={cricMatch?.id} className="match-data">
-              {cricMatch?.teamInfo?.length > 1 && (
+              {cricMatch?.teamInfo?.length > 1 ? (
                 <div className="flex justify-center">
                   <div className="team-vs-team">
                     <img
@@ -140,13 +140,15 @@ const MatchCard = () => {
                     <p> {cricMatch?.teamInfo[1]?.name} </p>
                   </div>
                 </div>
+              ) : (
+                "Team 1 vs Team 2"
               )}
 
               <div>
                 <p>{matchTime}</p>
 
                 <button
-                  className="hover:scale-110"
+                  className="btn"
                   onClick={() => showMatchDetails(cricMatch.id)}
                 >
                   Show Match Details

@@ -7,7 +7,9 @@ function App() {
     <>
       <NavigationBar />
 
-      <MatchCard />
+      <div className="responsive-flex">
+        <MatchCard />
+      </div>
     </>
   );
 }
