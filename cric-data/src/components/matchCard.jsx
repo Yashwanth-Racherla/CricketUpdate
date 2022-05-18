@@ -64,9 +64,9 @@ const MatchCard = () => {
   return (
     <>
       {showMatchDetailsPopup && (
-        <div className="bg-black bg-opacity-70 fixed z-10 w-full h-full top-0 left-0">
+        <div className="show-match-details-popup">
           <div className="show-match-details">
-            <h2 className="text-3xl text-center">{cricData.data.info.name}</h2>
+            <h2 className="text-center">{cricData.data.info.name}</h2>
             <div className="py-10">
               <p>{`Match : ${cricMatchDetails.name}`}</p>
               <p>{`Date : ${new Date(
@@ -75,8 +75,12 @@ const MatchCard = () => {
               <p>{`Venue : ${cricMatchDetails.venue}`}</p>
               <p>{`Toss : ${cricMatchDetails.tossWinner} won the toss and opted to ${cricMatchDetails.tossChoice} first`}</p>
             </div>
-            <div className="flex justify-between">
-              <div>
+            {/* <div className="flex">
+              <p>Match:</p>
+              <p>{cricMatchDetails.name}</p>
+            </div> */}
+            <div className="flex justify-center">
+              <div className="btn">
                 <p>
                   {cricMatchDetails.score[0]?.inning?.replace("Inning 1", "")}
                 </p>
@@ -85,7 +89,7 @@ const MatchCard = () => {
                   (${cricMatchDetails.score[0]?.o})`}
                 </p>
               </div>
-              <div>
+              <div className="btn">
                 <p>
                   {cricMatchDetails.score[1]?.inning?.replace("Inning 1", "")}
                 </p>
@@ -95,9 +99,7 @@ const MatchCard = () => {
                 </p>
               </div>
             </div>
-            <div className="text-center text-3xl">
-              {cricMatchDetails.status}
-            </div>
+            <div className="text-center">{cricMatchDetails.status}</div>
             <div className="close-match-details">
               <FontAwesomeIcon
                 icon={faXmark}
@@ -119,8 +121,8 @@ const MatchCard = () => {
           return (
             <div key={cricMatch?.id} className="match-data">
               {cricMatch?.teamInfo?.length > 1 ? (
-                <div className="flex justify-center">
-                  <div className="team-vs-team">
+                <div className="flex justify-center h-2/3 ">
+                  <div className="team-vs-team w-2/5">
                     <img
                       className="w-20"
                       src={cricMatch?.teamInfo[0]?.img}
@@ -128,10 +130,10 @@ const MatchCard = () => {
                     />
                     <p> {cricMatch?.teamInfo[0]?.name} </p>
                   </div>
-                  <div className="team-vs-team">
+                  <div className="team-vs-team w-1/5">
                     <img className="w-16" src="./vs image.jpg" alt="vs logo" />
                   </div>
-                  <div className="team-vs-team">
+                  <div className="team-vs-team w-2/5">
                     <img
                       className="w-20"
                       src={cricMatch?.teamInfo[1]?.img}
