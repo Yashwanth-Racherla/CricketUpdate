@@ -91,10 +91,10 @@ const MatchCard = () => {
             <div className="flex justify-center">
               <div className="btn mx-2">
                 <p>
-                  {cricMatchDetails?.score[0]?.inning?.replace("Inning 1", "")}
+                  {cricMatchDetails.score[0]?.inning?.replace("Inning 1", "")}
                 </p>
                 <p>
-                  {`${cricMatchDetails?.score[0]?.r}/${cricMatchDetails.score[0]?.w}
+                  {`${cricMatchDetails.score[0]?.r}/${cricMatchDetails.score[0]?.w}
                   (${cricMatchDetails.score[0]?.o})`}
                 </p>
               </div>
@@ -121,51 +121,55 @@ const MatchCard = () => {
         </div>
       )}
 
-      {cricData?.data?.matchList?.map((cricMatch) => {
-        const matchDate = new Date(cricMatch.dateTimeGMT);
-        const matchTime = matchDate.toDateString();
+      {cricData?.data?.matchList
+        ?.filter((cricMatch) => {
+          return cricMatch.status !== "Match not started";
+        })
+        .map((cricMatch) => {
+          const matchDate = new Date(cricMatch.dateTimeGMT);
+          const matchTime = matchDate.toDateString();
 
-        return (
-          <div key={cricMatch?.id} className="match-data">
-            {cricMatch?.teamInfo?.length > 1 ? (
-              <div className="flex justify-center h-2/3 ">
-                <div className="team-vs-team w-2/5">
-                  <img
-                    className="w-20"
-                    src={cricMatch?.teamInfo[0]?.img}
-                    alt="Team 1 logo"
-                  />
-                  <p> {cricMatch?.teamInfo[0]?.name} </p>
+          return (
+            <div key={cricMatch?.id} className="match-data">
+              {cricMatch?.teamInfo?.length > 1 ? (
+                <div className="flex justify-center h-2/3 ">
+                  <div className="team-vs-team w-2/5">
+                    <img
+                      className="w-20"
+                      src={cricMatch?.teamInfo[0]?.img}
+                      alt="Team 1 logo"
+                    />
+                    <p> {cricMatch?.teamInfo[0]?.name} </p>
+                  </div>
+                  <div className="team-vs-team w-1/5">
+                    <img className="w-16" src="./vs image.jpg" alt="vs logo" />
+                  </div>
+                  <div className="team-vs-team w-2/5">
+                    <img
+                      className="w-20"
+                      src={cricMatch?.teamInfo[1]?.img}
+                      alt="Team 1 logo"
+                    />
+                    <p> {cricMatch?.teamInfo[1]?.name} </p>
+                  </div>
                 </div>
-                <div className="team-vs-team w-1/5">
-                  <img className="w-16" src="./vs image.jpg" alt="vs logo" />
-                </div>
-                <div className="team-vs-team w-2/5">
-                  <img
-                    className="w-20"
-                    src={cricMatch?.teamInfo[1]?.img}
-                    alt="Team 1 logo"
-                  />
-                  <p> {cricMatch?.teamInfo[1]?.name} </p>
-                </div>
+              ) : (
+                "Team 1 vs Team 2"
+              )}
+
+              <div>
+                <p>{matchTime}</p>
+
+                <button
+                  className="btn"
+                  onClick={() => showMatchDetails(cricMatch.id)}
+                >
+                  Show Match Details
+                </button>
               </div>
-            ) : (
-              "Team 1 vs Team 2"
-            )}
-
-            <div>
-              <p>{matchTime}</p>
-
-              <button
-                className="btn"
-                onClick={() => showMatchDetails(cricMatch.id)}
-              >
-                Show Match Details
-              </button>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
 
       {cricData?.data?.matchList
         ?.filter((cricMatch) => {
