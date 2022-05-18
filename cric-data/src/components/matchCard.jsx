@@ -1,9 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const MatchCard = () => {
   const [cricData, setCricData] = useState({});
   const [cricMatchDetails, setCricMatchDetails] = useState(null);
+  const [showMatchDetailsPopup, setShowMatchDetailsPopup] = useState(false);
+
   const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
   // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
@@ -39,18 +43,18 @@ const MatchCard = () => {
     const matchData = await fetch(
       `https://api.cricapi.com/v1/match_info?apikey=${apiKey}&offset=0&id=${id}`
     );
-
-    const matchDetails = await matchData.json();
-    setCricMatchDetails(matchDetails);
-    console.log(matchDetails);
-    console.log(matchDetails.data.score[0]);
-    console.log(matchDetails.data.score[1]);
-    console.log(matchDetails.data.score[0].inning.replace("inning 1", ""));
+    return await matchData.json();
   };
 
   const showMatchDetails = (id) => {
-    getMatchData(id);
-    document.querySelector(".match-data").classList.add("active");
+    getMatchData(id).then((res) => {
+      setCricMatchDetails(res.data);
+      setShowMatchDetailsPopup(true);
+    });
+  };
+
+  const closeMatchDetails = () => {
+    setShowMatchDetailsPopup(false);
   };
 
   useEffect(() => {
@@ -59,31 +63,46 @@ const MatchCard = () => {
 
   return (
     <>
-      {cricMatchDetails !== null && (
-        <div className="bg-black bg-opacity-90 fixed z-10 w-full h-full top-0 left-0">
-          <div className="match-details">
-            <div className="text-blue-500">
-              <p>
-                {cricMatchDetails.data.score[0].inning.replace("Inning 1", "")}
-              </p>
-              <p>
-                {`${cricMatchDetails.data.score[0].r} /
-                ${cricMatchDetails.data.score[0].w} in
-                ${cricMatchDetails.data.score[0].o} overs`}
-              </p>
+      {showMatchDetailsPopup && (
+        <div className="bg-black bg-opacity-70 fixed z-10 w-full h-full top-0 left-0">
+          <div className="show-match-details">
+            <h2 className="text-3xl text-center">{cricData.data.info.name}</h2>
+            <div className="py-10">
+              <p>{`Match : ${cricMatchDetails.name}`}</p>
+              <p>{`Date : ${new Date(
+                cricMatchDetails.dateTimeGMT
+              ).toDateString()}`}</p>
+              <p>{`Venue : ${cricMatchDetails.venue}`}</p>
+              <p>{`Toss : ${cricMatchDetails.tossWinner} won the toss and opted to ${cricMatchDetails.tossChoice} first`}</p>
             </div>
-            <div className="text-yellow-400">
-              <p>
-                {cricMatchDetails.data.score[1].inning.replace("Inning 1", "")}
-              </p>
-              <p>
-                {`${cricMatchDetails.data.score[1].r} /
-                ${cricMatchDetails.data.score[1].w} in
-                ${cricMatchDetails.data.score[1].o} overs`}
-              </p>
+            <div className="flex justify-between">
+              <div>
+                <p>
+                  {cricMatchDetails.score[0]?.inning?.replace("Inning 1", "")}
+                </p>
+                <p>
+                  {`${cricMatchDetails.score[0]?.r}/${cricMatchDetails.score[0]?.w}
+                  (${cricMatchDetails.score[0]?.o})`}
+                </p>
+              </div>
+              <div>
+                <p>
+                  {cricMatchDetails.score[1]?.inning?.replace("Inning 1", "")}
+                </p>
+                <p>
+                  {`${cricMatchDetails.score[1]?.r}/${cricMatchDetails.score[1]?.w}
+                  (${cricMatchDetails.score[1]?.o})`}
+                </p>
+              </div>
             </div>
-            <div className="text-green-600 text-3xl text-center">
-              {cricMatchDetails.data.status}
+            <div className="text-center text-3xl">
+              {cricMatchDetails.status}
+            </div>
+            <div className="close-match-details">
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => closeMatchDetails()}
+              />
             </div>
           </div>
         </div>
@@ -100,8 +119,8 @@ const MatchCard = () => {
           return (
             <div key={cricMatch?.id} className="match-data">
               {cricMatch?.teamInfo?.length > 1 && (
-                <div className="text-3xl font-bold flex justify-center">
-                  <div className="flex flex-col items-center flex-1">
+                <div className="flex justify-center">
+                  <div className="team-vs-team">
                     <img
                       className="w-20"
                       src={cricMatch?.teamInfo[0]?.img}
@@ -109,10 +128,10 @@ const MatchCard = () => {
                     />
                     <p> {cricMatch?.teamInfo[0]?.name} </p>
                   </div>
-                  <div className="flex flex-1 justify-center">
-                    <img className="w-24" src="./vs image.jpg" alt="vs logo" />
+                  <div className="team-vs-team">
+                    <img className="w-16" src="./vs image.jpg" alt="vs logo" />
                   </div>
-                  <div className="flex flex-col items-center flex-1">
+                  <div className="team-vs-team">
                     <img
                       className="w-20"
                       src={cricMatch?.teamInfo[1]?.img}
@@ -123,11 +142,11 @@ const MatchCard = () => {
                 </div>
               )}
 
-              <div className="font-bold">
-                <p className="p-4 text-2xl">{matchTime}</p>
+              <div>
+                <p>{matchTime}</p>
 
                 <button
-                  className="text-3xl text-red-600 font-bold  hover:scale-125"
+                  className="hover:scale-110"
                   onClick={() => showMatchDetails(cricMatch.id)}
                 >
                   Show Match Details

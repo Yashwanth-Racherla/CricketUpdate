@@ -1,10 +1,16 @@
-.match-details {
-  @apply bg-white px-20 py-10 text-center text-2xl font-bold absolute 
-       top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+.show-match-details {
+  @apply bg-gradient-to-r from-violet-500 to-fuchsia-500 text-2xl font-bold absolute 
+       top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10;
 }
 .match-data {
-  @apply border-2 border-black p-10 text-center;
+  /* background-image: linear-gradient(to right, #cc2b5e, #753a88); */
+  @apply border-2
+    border-black text-center;
 }
-.match-data .active {
-  @apply hidden;
+.close-match-details {
+  @apply cursor-pointer hover:scale-110 text-black text-3xl absolute top-0 right-[2%];
+}
+
+.team-vs-team {
+  @apply flex flex-col items-center flex-1;
 }
