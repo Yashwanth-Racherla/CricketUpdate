@@ -11,9 +11,9 @@ const MatchCard = () => {
   const [showMatchScoreCardPopup, setShowMatchScoreCardPopup] = useState(false);
 
   // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
-  // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
+  const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
+  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
   // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd"
 
   const byDate = (a, b) => {
@@ -76,14 +76,6 @@ const MatchCard = () => {
   };
 
   //  ====================================================================
-  //  closeMatchData() function called on jsx button element
-  //  ====================================================================
-  const closeMatchData = () => {
-    setShowMatchDataPopup(false);
-    setShowMatchScoreCardPopup(false);
-  };
-
-  //  ====================================================================
   //  showMatchScoreCard() function called on jsx button element
   //  ====================================================================
   const showMatchScoreCard = async (id) => {
@@ -97,14 +89,133 @@ const MatchCard = () => {
     });
   };
 
+  //  ====================================================================
+  //  closeMatchData() function called on jsx button element
+  //  ====================================================================
+  const closeMatchData = () => {
+    setShowMatchDataPopup(false);
+    setShowMatchScoreCardPopup(false);
+  };
+
   return (
     <>
       {showMatchScoreCardPopup && (
         <div className="show-popUp">
-          <div className="show-popUp-data">
-            <p>
-              {cricMatchScoreCard?.score[0]?.inning?.replace("Inning 1", "")}
-            </p>
+          <div className="show-popUp-scorecard">
+            <div className="flex justify-between py-6">
+              <p>
+                {cricMatchScoreCard.score[0].inning.replace("Inning 1", "")}
+              </p>
+              <p>
+                {`${cricMatchScoreCard.score[0].r}/${cricMatchScoreCard.score[0].w}
+                    (${cricMatchScoreCard.score[0].o})`}
+              </p>
+            </div>
+
+            <div className="flex justify-between">
+              <div>
+                <p>Batter</p>
+                {cricMatchScoreCard.scorecard[0].batting.map((person) => {
+                  return <p>{person.batsman.name}</p>;
+                })}
+              </div>
+              <div>
+                <p>dismissal</p>
+                {cricMatchScoreCard.scorecard[0].batting.map((person) => {
+                  return <p>{`${person["dismissal-text"]}`}</p>;
+                })}
+              </div>
+              <div>
+                <p>Runs</p>
+                {cricMatchScoreCard.scorecard[0].batting.map((person) => {
+                  return <p>{person.r}</p>;
+                })}
+              </div>
+              <div>
+                <p>Balls</p>
+                {cricMatchScoreCard.scorecard[0].batting.map((person) => {
+                  return <p>{person.b}</p>;
+                })}
+              </div>
+              <div>
+                <p>4s</p>
+                {cricMatchScoreCard.scorecard[0].batting.map((person) => {
+                  return <p>{person["4s"]}</p>;
+                })}
+              </div>
+              <div>
+                <p>6s</p>
+                {cricMatchScoreCard.scorecard[0].batting.map((person) => {
+                  return <p>{person["6s"]}</p>;
+                })}
+              </div>
+              <div>
+                <p>SR</p>
+                {cricMatchScoreCard.scorecard[0].batting.map((person) => {
+                  return <p>{person.sr}</p>;
+                })}
+              </div>
+            </div>
+
+            <div className="flex justify-between pt-4">
+              <p>Extras</p>
+              <p>{`${cricMatchScoreCard.scorecard[1].extras.r} ( b ${cricMatchScoreCard.scorecard[1].extras.b}, lb ${cricMatchScoreCard.scorecard[1].extras.lb}, w ${cricMatchScoreCard.scorecard[1].extras.w}, nb ${cricMatchScoreCard.scorecard[1].extras.nb}, p ${cricMatchScoreCard.scorecard[1].extras.p} )`}</p>
+            </div>
+            <div className="flex justify-between pb-4">
+              <p>Total</p>
+              <p>{`${cricMatchScoreCard.scorecard[1].totals.R} ( ${cricMatchScoreCard.scorecard[1].totals.W} wkts, ${cricMatchScoreCard.scorecard[1].totals.O} overs )`}</p>
+            </div>
+
+            <div className="flex justify-between">
+              <div>
+                <p>Bowler</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{person.bowler.name}</p>;
+                })}
+              </div>
+              <div>
+                <p>Overs</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{`${person.o}`}</p>;
+                })}
+              </div>
+              <div>
+                <p>Maidens</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{person.m}</p>;
+                })}
+              </div>
+              <div>
+                <p>Runs</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{person.r}</p>;
+                })}
+              </div>
+              <div>
+                <p>Wkts</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{person.w}</p>;
+                })}
+              </div>
+              <div>
+                <p>NB</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{person.nb}</p>;
+                })}
+              </div>
+              <div>
+                <p>WD</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{person.wd}</p>;
+                })}
+              </div>
+              <div>
+                <p>ECO</p>
+                {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
+                  return <p>{person.eco}</p>;
+                })}
+              </div>
+            </div>
 
             <button className="close-popUp">
               <FontAwesomeIcon
