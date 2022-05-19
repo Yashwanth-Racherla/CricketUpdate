@@ -102,7 +102,7 @@ const MatchCard = () => {
       {showMatchScoreCardPopup && (
         <div className="show-popUp">
           <div className="show-popUp-scorecard">
-            <div className="flex justify-between py-6">
+            <div className="flex justify-between py-6 text-lg font-bold">
               <p>
                 {cricMatchScoreCard.score[0].inning.replace("Inning 1", "")}
               </p>
@@ -126,13 +126,13 @@ const MatchCard = () => {
                 })}
               </div>
               <div>
-                <p>Runs</p>
+                <p>R</p>
                 {cricMatchScoreCard.scorecard[0].batting.map((person) => {
                   return <p>{person.r}</p>;
                 })}
               </div>
               <div>
-                <p>Balls</p>
+                <p>B</p>
                 {cricMatchScoreCard.scorecard[0].batting.map((person) => {
                   return <p>{person.b}</p>;
                 })}
@@ -174,25 +174,25 @@ const MatchCard = () => {
                 })}
               </div>
               <div>
-                <p>Overs</p>
+                <p>O</p>
                 {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
                   return <p>{`${person.o}`}</p>;
                 })}
               </div>
               <div>
-                <p>Maidens</p>
+                <p>M</p>
                 {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
                   return <p>{person.m}</p>;
                 })}
               </div>
               <div>
-                <p>Runs</p>
+                <p>R</p>
                 {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
                   return <p>{person.r}</p>;
                 })}
               </div>
               <div>
-                <p>Wkts</p>
+                <p>W</p>
                 {cricMatchScoreCard.scorecard[0].bowling.map((person) => {
                   return <p>{person.w}</p>;
                 })}
