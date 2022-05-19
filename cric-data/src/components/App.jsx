@@ -6,8 +6,7 @@ function App() {
   return (
     <>
       <NavigationBar />
-
-      <div className="responsive-flex">
+      <div className="md:flex md:justify-center md:flex-wrap">
         <MatchCard />
       </div>
     </>
