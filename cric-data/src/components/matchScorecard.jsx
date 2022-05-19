@@ -1,100 +1,88 @@
 import React from "react";
 
 const MatchScorecard = ({ scoreCardData }) => {
-  console.log(scoreCardData);
-  if (!scoreCardData) return;
   return (
     <>
-      <div>
-        <div className="flex justify-between py-6 text-lg font-bold">
-          <p>{scoreCardData.inning.replace("Inning 1", "")}</p>
+      <div className="p-2">
+        {/* ====================================================================
+        Team name and innnings score
+        ==================================================================== */}
+        <div className="flex justify-between py-6 text-lg font-bold ">
+          <p>{scoreCardData?.inning.replace("Inning 1", "")}</p>
           <p>
-            {`${scoreCardData.totals.R}/${scoreCardData.totals.W}
-                    (${scoreCardData.totals.O})`}
+            {`${scoreCardData?.totals.R}/${scoreCardData?.totals.W}
+                    (${scoreCardData?.totals.O})`}
           </p>
         </div>
-        <div className="flex justify-between font-bold pb-2">
-          <div className="shrink-0 w-24">Batsman</div>
-          <div className="shrink-0 w-32">Dismissal</div>
-          <div className="shrink-0 text-center w-6">R</div>
-          <div className="shrink-0 text-center w-6 ">B</div>
-          <div className="shrink-0 text-center w-6 ">4s</div>
-          <div className="shrink-0 text-center w-6 ">6s</div>
-          <div className="shrink-0 text-center w-10 ">SR</div>
+        {/* ====================================================================
+        Batsman scorecard
+        ==================================================================== */}
+        <div className="flex justify-between font-bold p-2 mb-2 text-center bg-gray-400">
+          <div className="text-left sm:flex">
+            <div className="w-28 mr-8">Batsman</div>
+            <div className="w-28"></div>
+          </div>
+          <div className="w-6">R</div>
+          <div className="w-6 ">B</div>
+          <div className="w-6 ">4s</div>
+          <div className="w-6 ">6s</div>
+          <div className="w-10">SR</div>
         </div>
-        {scoreCardData.batting.map((person) => {
+        {scoreCardData?.batting.map((person) => {
           return (
-            <div className="flex justify-between">
-              <div className="shrink-0 w-24">{person.batsman.name}</div>
-              <div className="shrink-0 w-32">{`${person["dismissal-text"]}`}</div>
-              <div className="shrink-0 text-center w-6">{person.r}</div>
-              <div className="shrink-0 text-center w-6 ">{person.b}</div>
-              <div className="shrink-0 text-center w-6 ">{person["4s"]}</div>
-              <div className="shrink-0 text-center w-6 ">{person["6s"]}</div>
-              <div className="shrink-0 text-center w-10 ">{person.sr}</div>
+            <div className="flex justify-between p-2 text-center border-b-[2px]">
+              <div className="text-left sm:flex">
+                <p className="w-28 font-semibold mr-8">{person.batsman.name}</p>
+                <p className="w-28">{`${person["dismissal-text"]}`}</p>
+              </div>
+              <p className="w-6">{person.r}</p>
+              <p className="w-6">{person.b}</p>
+              <p className="w-6">{person["4s"]}</p>
+              <p className="w-6">{person["6s"]}</p>
+              <p className="w-10">{person.sr}</p>
             </div>
           );
         })}
-
-        <div className="flex justify-between pt-4">
+        {/* ====================================================================
+       Team Total and Extras 
+        ==================================================================== */}
+        <div className="flex justify-between pt-4 font-semibold">
           <p>Extras</p>
-          <p>{`${scoreCardData.extras.r} ( b ${scoreCardData.extras.b}, lb ${scoreCardData.extras.lb}, w ${scoreCardData.extras.w}, nb ${scoreCardData.extras.nb}, p ${scoreCardData.extras.p} )`}</p>
+          <p>{`${scoreCardData?.extras?.r} ( b ${scoreCardData?.extras?.b}, lb ${scoreCardData?.extras?.lb}, w ${scoreCardData?.extras?.w}, nb ${scoreCardData?.extras?.nb}, p ${scoreCardData?.extras?.p} )`}</p>
         </div>
-        <div className="flex justify-between pb-4">
+        <div className="flex justify-between pb-4 font-semibold">
           <p>Total</p>
-          <p>{`${scoreCardData.totals.R} ( ${scoreCardData.totals.W} wkts, ${scoreCardData.totals.O} overs )`}</p>
+          <p>{`${scoreCardData?.totals?.R} ( ${scoreCardData?.totals?.W} wkts, ${scoreCardData?.totals?.O} overs )`}</p>
         </div>
-
-        <div className="flex justify-between">
-          <div>
-            <p>Bowler</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{person.bowler.name}</p>;
-            })}
-          </div>
-          <div>
-            <p>O</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{`${person.o}`}</p>;
-            })}
-          </div>
-          <div>
-            <p>M</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{person.m}</p>;
-            })}
-          </div>
-          <div>
-            <p>R</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{person.r}</p>;
-            })}
-          </div>
-          <div>
-            <p>W</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{person.w}</p>;
-            })}
-          </div>
-          <div>
-            <p>NB</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{person.nb}</p>;
-            })}
-          </div>
-          <div>
-            <p>WD</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{person.wd}</p>;
-            })}
-          </div>
-          <div>
-            <p>ECO</p>
-            {scoreCardData.bowling.map((person) => {
-              return <p>{person.eco}</p>;
-            })}
-          </div>
+        {/* ====================================================================
+        Bowler scorecard 
+        ==================================================================== */}
+        <div className="flex justify-between font-bold p-2 mb-2 text-center bg-gray-400">
+          <p className="text-left w-24">Bowler</p>
+          <p className="w-4">O</p>
+          <p className="w-4">M</p>
+          <p className="w-4">R</p>
+          <p className="w-4">W</p>
+          <p className="w-4">NB</p>
+          <p className="w-4">WD</p>
+          <p className="w-10">ECO</p>
         </div>
+        {scoreCardData?.bowling.map((person) => {
+          return (
+            <div className="flex justify-between p-2 text-center border-b-2">
+              <p className="text-left w-24 font-semibold">
+                {person.bowler.name}
+              </p>
+              <p className="w-4">{person.o}</p>
+              <p className="w-4">{person.m}</p>
+              <p className="w-4">{person.r}</p>
+              <p className="w-4">{person.w}</p>
+              <p className="w-4">{person.nb}</p>
+              <p className="w-4">{person.wd}</p>
+              <p className="w-10">{person.eco}</p>
+            </div>
+          );
+        })}
       </div>
     </>
   );

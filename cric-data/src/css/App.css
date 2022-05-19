@@ -2,10 +2,7 @@
   @apply bg-black bg-opacity-80 fixed z-10 w-full h-full top-0 left-0;
 }
 .show-popUp-data {
-  @apply bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 text-sm w-4/5 max-w-[400px];
-}
-.show-popUp-scorecard {
-  @apply bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 text-sm w-4/5 px-10;
+  @apply bg-white w-full max-w-2xl h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 text-sm overflow-y-scroll ;
 }
 
 .close-popUp {
@@ -20,5 +17,5 @@
   @apply flex flex-col items-center;
 }
 .btn {
-  @apply bg-gradient-to-r from-violet-500 to-fuchsia-500  text-white p-2 border-[1px] rounded-md border-black;
+  @apply bg-[#a881af] text-white p-2 border-[1px] border-collapse border-black;
 }

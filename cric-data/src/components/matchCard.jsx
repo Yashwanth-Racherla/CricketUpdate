@@ -9,12 +9,13 @@ const MatchCard = () => {
   const [cricMatchData, setcricMatchData] = useState(null);
   const [cricMatchScoreCard, setCricMatchScoreCard] = useState(null);
   const [showMatchDataPopup, setShowMatchDataPopup] = useState(false);
+  const [inningsNumber, setInningsNumber] = useState(0);
 
   // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
   // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
-  // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd"
+  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
+  const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
 
   const byDate = (a, b) => {
     if (new Date(a.dateTimeGMT).valueOf() > new Date(b.dateTimeGMT).valueOf()) {
@@ -44,24 +45,6 @@ const MatchCard = () => {
   }, []);
 
   //  ====================================================================
-  //  showMatchData() function called on show Match Details button element
-  //  ====================================================================
-
-  // const getMatchData = async (id) => {
-  //   const apiMatchData = await fetch(
-  //     `https://api.cricapi.com/v1/match_info?apikey=${apiKey}&offset=0&id=${id}`
-  //   );
-  //   return await apiMatchData.json();
-  // };
-
-  // const showMatchData = async (id) => {
-  //   getMatchData(id).then((res) => {
-  //     setcricMatchData(res.data);
-  //     setShowMatchDataPopup(true);
-  //   });
-  // };
-
-  //  ====================================================================
   //  showMatchData() function called on jsx button element
   //  ====================================================================
 
@@ -83,14 +66,11 @@ const MatchCard = () => {
   };
 
   //  ====================================================================
-  //  showMatchScoreCard() function called on jsx button element
-  //  ====================================================================
-
-  //  ====================================================================
   //  closeMatchData() function called on jsx button element
   //  ====================================================================
   const closeMatchData = () => {
     setShowMatchDataPopup(false);
+    setInningsNumber(0);
   };
 
   return (
@@ -98,10 +78,10 @@ const MatchCard = () => {
       {showMatchDataPopup && (
         <div className="show-popUp">
           <div className="show-popUp-data">
-            <h2 className="text-center text-2xl font-bold pt-6">
+            {/* <h2 className="text-center text-2xl font-bold pt-6">
               {cricSeriesData.data.info.name}
-            </h2>
-            <div className=" py-10 font-semibold">
+            </h2> */}
+            {/* <div className=" py-10 font-semibold">
               <div className="flex">
                 <p className="shrink-0">{`Match : `}</p>
                 <p>{cricMatchData.name}</p>
@@ -138,11 +118,27 @@ const MatchCard = () => {
             </div>
             <div className="text-center text-[#FFC371] font-bold sm:text-xl p-4">
               {cricMatchData.status}
+            </div> */}
+            <div className="font-bold sm:text-xl p-4">
+              {cricMatchData.status}
             </div>
 
-            {/* scorecard goes here */}
-            <MatchScorecard scoreCardData={cricMatchScoreCard?.scorecard[0]} />
-            <MatchScorecard scoreCardData={cricMatchScoreCard?.scorecard[1]} />
+            <div className="flex">
+              {cricMatchScoreCard?.scorecard?.map((teamScoreCard, index) => {
+                return (
+                  <button
+                    className="w-1/2 btn"
+                    onClick={() => setInningsNumber(index)}
+                  >
+                    {teamScoreCard.inning.replace("Inning 1", "")}
+                  </button>
+                );
+              })}
+            </div>
+
+            <MatchScorecard
+              scoreCardData={cricMatchScoreCard?.scorecard[inningsNumber]}
+            />
 
             <button className="close-popUp">
               <FontAwesomeIcon
@@ -151,9 +147,7 @@ const MatchCard = () => {
               />
             </button>
           </div>
-          {/* end popup-data */}
         </div>
-        // end popup
       )}
 
       {cricSeriesData?.data?.matchList
@@ -198,12 +192,6 @@ const MatchCard = () => {
                 >
                   Show Match Details
                 </button>
-                {/* <button
-                  className="btn"
-                  onClick={() => showMatchScoreCard(cricMatch.id)}
-                >
-                  Show Match ScoreCard
-                </button> */}
               </div>
             </div>
           );
