@@ -11,11 +11,11 @@ const MatchCard = () => {
   const [showMatchDataPopup, setShowMatchDataPopup] = useState(false);
   const [inningsNumber, setInningsNumber] = useState(0);
 
-  // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
+  const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
   // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
   // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
-  const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
+  // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd"
 
   const byDate = (a, b) => {
     if (new Date(a.dateTimeGMT).valueOf() > new Date(b.dateTimeGMT).valueOf()) {
@@ -61,7 +61,7 @@ const MatchCard = () => {
     await matchScoreCardApiData.json().then((res) => {
       setCricMatchScoreCard(res.data);
       setShowMatchDataPopup(true);
-      // console.log(res.data);
+      console.log(res.data);
     });
   };
 
@@ -75,85 +75,11 @@ const MatchCard = () => {
 
   return (
     <>
-      {showMatchDataPopup && (
-        <div className="show-popUp">
-          <div className="show-popUp-data">
-            {/* <h2 className="text-center text-2xl font-bold pt-6">
-              {cricSeriesData.data.info.name}
-            </h2> */}
-            {/* <div className=" py-10 font-semibold">
-              <div className="flex">
-                <p className="shrink-0">{`Match : `}</p>
-                <p>{cricMatchData.name}</p>
-              </div>
-              <div className="flex">
-                <p className="shrink-0">{`Date : `}</p>
-                <p>{new Date(cricMatchData.dateTimeGMT).toDateString()}</p>
-              </div>
-              <div className="flex">
-                <p className="shrink-0">{`Venue : `}</p>
-                <p>{cricMatchData.venue}</p>
-              </div>
-              <div className="flex ">
-                <p className="shrink-0">{`Toss : `}</p>
-                <p>{`${cricMatchData.tossWinner} won the toss and opted to ${cricMatchData.tossChoice} first`}</p>
-              </div>
-            </div>
-
-            <div className="flex justify-center">
-              <div className="btn mx-2">
-                <p>{cricMatchData.score[0]?.inning?.replace("Inning 1", "")}</p>
-                <p>
-                  {`${cricMatchData.score[0]?.r}/${cricMatchData.score[0]?.w}
-                  (${cricMatchData.score[0]?.o})`}
-                </p>
-              </div>
-              <div className="btn mx-2">
-                <p>{cricMatchData.score[1]?.inning?.replace("Inning 1", "")}</p>
-                <p>
-                  {`${cricMatchData.score[1]?.r}/${cricMatchData.score[1]?.w}
-                  (${cricMatchData.score[1]?.o})`}
-                </p>
-              </div>
-            </div>
-            <div className="text-center text-[#FFC371] font-bold sm:text-xl p-4">
-              {cricMatchData.status}
-            </div> */}
-            <div className="font-bold sm:text-xl p-4">
-              {cricMatchData.status}
-            </div>
-
-            <div className="flex">
-              {cricMatchScoreCard?.scorecard?.map((teamScoreCard, index) => {
-                return (
-                  <button
-                    className="w-1/2 btn"
-                    onClick={() => setInningsNumber(index)}
-                  >
-                    {teamScoreCard.inning.replace("Inning 1", "")}
-                  </button>
-                );
-              })}
-            </div>
-
-            <MatchScorecard
-              scoreCardData={cricMatchScoreCard?.scorecard[inningsNumber]}
-            />
-
-            <button className="close-popUp">
-              <FontAwesomeIcon
-                icon={faXmark}
-                onClick={() => closeMatchData()}
-              />
-            </button>
-          </div>
-        </div>
-      )}
-
       {cricSeriesData?.data?.matchList
         ?.filter((cricMatch) => {
           return cricMatch.status !== "Match not started";
         })
+        .slice(0, 2)
         .map((cricMatch) => {
           return (
             <div key={cricMatch?.id} className="match-data">
@@ -196,6 +122,66 @@ const MatchCard = () => {
             </div>
           );
         })}
+
+      {showMatchDataPopup && (
+        <div className="show-popUp">
+          <div className="show-popUp-data">
+            {/* ======= Match Status ======  */}
+            <h2 className="font-bold py-4 text-lg sm:text-xl">
+              {cricMatchData.status}
+            </h2>
+            {/* ===== Team Names ====== */}
+            <div className="flex">
+              {cricMatchScoreCard?.scorecard?.map((teamScoreCard, index) => {
+                return (
+                  <button
+                    className="w-1/2 btn flex flex-col items-center font-bold sm:text-base"
+                    onClick={() => setInningsNumber(index)}
+                  >
+                    <span>{teamScoreCard.inning.replace("Inning 1", "")}</span>
+                    <span>
+                      {`${teamScoreCard.totals?.R}/${teamScoreCard.totals?.W}
+                      (${teamScoreCard.totals?.O})`}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            {/* ====== Match Scorecard Component ===== */}
+            <MatchScorecard
+              scoreCardData={cricMatchScoreCard?.scorecard[inningsNumber]}
+            />
+            {/* ======= close the pop up button ====== */}
+            <button className="close-popUp">
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => closeMatchData()}
+              />
+            </button>
+            {/* ======= Match Details ====== */}
+            <div className="pt-8 sm:text-lg">
+              <div className="font-semibold">
+                <div className="flex">
+                  <p className="shrink-0">{`Match : `}</p>
+                  <p>{cricMatchData.name}</p>
+                </div>
+                <div className="flex">
+                  <p className="shrink-0">{`Date : `}</p>
+                  <p>{new Date(cricMatchData.dateTimeGMT).toDateString()}</p>
+                </div>
+                <div className="flex">
+                  <p className="shrink-0">{`Venue : `}</p>
+                  <p>{cricMatchData.venue}</p>
+                </div>
+                <div className="flex ">
+                  <p className="shrink-0">{`Toss : `}</p>
+                  <p>{`${cricMatchData.tossWinner} won the toss and opted to ${cricMatchData.tossChoice} first`}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

@@ -3,11 +3,11 @@ import React from "react";
 const MatchScorecard = ({ scoreCardData }) => {
   return (
     <>
-      <div className="p-2">
+      <div>
         {/* ====================================================================
         Team name and innnings score
         ==================================================================== */}
-        <div className="flex justify-between py-6 text-lg font-bold ">
+        <div className="flex justify-between font-bold py-2 text-lg sm:text-xl ">
           <p>{scoreCardData?.inning.replace("Inning 1", "")}</p>
           <p>
             {`${scoreCardData?.totals.R}/${scoreCardData?.totals.W}
@@ -30,7 +30,10 @@ const MatchScorecard = ({ scoreCardData }) => {
         </div>
         {scoreCardData?.batting.map((person) => {
           return (
-            <div className="flex justify-between p-2 text-center border-b-[2px]">
+            <div
+              key={person.batsman.name}
+              className="flex justify-between p-2 text-center border-b-[2px]"
+            >
               <div className="text-left sm:flex">
                 <p className="w-28 font-semibold mr-8">{person.batsman.name}</p>
                 <p className="w-28">{`${person["dismissal-text"]}`}</p>
