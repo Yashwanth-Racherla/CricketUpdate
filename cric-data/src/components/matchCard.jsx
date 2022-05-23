@@ -8,7 +8,7 @@ const MatchCard = ({ cricMatch, showMatchData }) => {
           <>
             <p className="pb-2 h-14">{cricMatch?.name}</p>
 
-            <div className="flex justify-center h-[152px]">
+            <div className="flex justify-center h-[128px] sm:h-[152px]">
               <div className="team-vs-team w-2/5">
                 <img
                   className="w-20"
@@ -37,10 +37,13 @@ const MatchCard = ({ cricMatch, showMatchData }) => {
         <div>
           <p>{new Date(cricMatch?.dateTimeGMT).toDateString()}</p>
 
-          <button className="btn" onClick={() => showMatchData(cricMatch.id)}>
+          <button
+            className="btn m-2"
+            onClick={() => showMatchData(cricMatch.id)}
+          >
             Show Match Details
           </button>
-          <p>{cricMatch?.status}</p>
+          <p className="font-bold text-lg">{cricMatch?.status}</p>
         </div>
       </div>
     </>

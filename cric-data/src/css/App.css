@@ -23,5 +23,5 @@
 .btn {
   @apply bg-gradient-to-r from-[#960ead] to-[#0ad8c7]
   hover:bg-gradient-to-r from-[#0ad8c7] to-[#960ead]
-  text-white p-2 border-[1px] border-collapse border-black;
+  text-white p-2 font-bold border-[1px] border-collapse border-black;
 }
