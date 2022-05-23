@@ -1,12 +1,12 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import MatchScorecard from "./matchScorecard";
 import MatchCard from "./matchCard";
 
 const MatchCards = () => {
-  const [cricSeriesData, setCricSeriesData] = useState({});
+  const [cricSeriesData, setCricSeriesData] = useState([]);
   const [cricMatchData, setcricMatchData] = useState(null);
   const [cricMatchScoreCard, setCricMatchScoreCard] = useState(null);
   const [showMatchDataPopup, setShowMatchDataPopup] = useState(false);
@@ -17,6 +17,21 @@ const MatchCards = () => {
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
   // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
   // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd"
+
+  const seriesList = [
+    // {
+    //   id: "47b54677-34de-4378-9019-154e82b9cc1a",
+    //   name: "IPL",
+    // },
+    // {
+    //   id: "17976dfb-1371-488c-b420-c7d2e2cd7d14",
+    //   name: "UgandaVsNepal",
+    // },
+    {
+      id: "b5108aba-0694-42c4-b9eb-8f5eda5a41c7",
+      name: "BangladeshVsSrilanka",
+    },
+  ];
 
   const byDate = (a, b) => {
     if (new Date(a.dateTimeGMT).valueOf() > new Date(b.dateTimeGMT).valueOf()) {
@@ -30,20 +45,23 @@ const MatchCards = () => {
     }
   };
 
-  const getSeriesData = async () => {
-    const seriesApiData = await fetch(
-      `https://api.cricapi.com/v1/series_info?apikey=${apiKey}&offset=0&id=47b54677-34de-4378-9019-154e82b9cc1a`
-    );
+  const tempSeriesArr = [];
+  console.log(seriesList.length);
+  seriesList.forEach((series) => {
+    const getSeriesData = async () => {
+      const seriesApiData = await fetch(
+        `https://api.cricapi.com/v1/series_info?apikey=${apiKey}&offset=0&id=${series.id}`
+      );
 
-    await seriesApiData.json().then((res) => {
-      res.data?.matchList?.sort(byDate);
-      setCricSeriesData(res);
-    });
-  };
-
-  useEffect(() => {
+      await seriesApiData.json().then((res) => {
+        // res.data?.matchList?.sort(byDate);
+        tempSeriesArr.push(res);
+        // setCricSeriesData((prevState) => [...prevState, res]);
+        setCricSeriesData(tempSeriesArr);
+      });
+    };
     getSeriesData();
-  }, []);
+  });
 
   //  ====================================================================
   //  showMatchData() function called on jsx button element
@@ -82,30 +100,40 @@ const MatchCards = () => {
 
   return (
     <>
-      <div className="w-full p-2 font-extrabold text-xl sm:text-3xl">
-        <p>{cricSeriesData?.data?.info?.name}</p>
-      </div>
-      {cricSeriesData?.data?.matchList
-        ?.filter((cricMatch) => {
-          return cricMatch.status !== "Match not started";
-        })
-        .slice(0, matchesToShow)
-        .map((cricMatch) => {
-          return (
-            <MatchCard cricMatch={cricMatch} showMatchData={showMatchData} />
-          );
-        })}
-      {matchesToShow <
-        cricSeriesData?.data?.matchList.filter((cricMatch) => {
-          return cricMatch.status !== "Match not started";
-        }).length && (
-        <button
-          className="btn  text-blue-600 font-bold text-xl w-full"
-          onClick={() => showMoreMatches()}
-        >
-          show more matches
-        </button>
-      )}
+      {cricSeriesData.map((series) => {
+        <>
+          <div className="p-2 font-extrabold text-xl sm:text-3xl">
+            <p>{series?.data?.info?.name}</p>
+          </div>
+          <div className="md:flex md:justify-center md:flex-wrap">
+            {series?.data?.matchList
+              ?.filter((cricMatch) => {
+                return cricMatch.status !== "Match not started";
+              })
+              .slice(0, matchesToShow)
+              .map((cricMatch) => {
+                return (
+                  <MatchCard
+                    cricMatch={cricMatch}
+                    showMatchData={showMatchData}
+                  />
+                );
+              })}
+          </div>
+
+          {matchesToShow <
+            series?.data?.matchList.filter((cricMatch) => {
+              return cricMatch.status !== "Match not started";
+            }).length && (
+            <button
+              className="btn p-2 m-2 text-blue-600 font-bold text-xl"
+              onClick={() => showMoreMatches()}
+            >
+              More matches
+            </button>
+          )}
+        </>;
+      })}
 
       {showMatchDataPopup && (
         <div className="show-popUp">

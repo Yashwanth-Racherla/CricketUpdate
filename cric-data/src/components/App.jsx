@@ -6,9 +6,8 @@ function App() {
   return (
     <>
       <NavigationBar />
-      <div className="md:flex md:justify-center md:flex-wrap">
-        <MatchCards />
-      </div>
+
+      <MatchCards />
     </>
   );
 }
