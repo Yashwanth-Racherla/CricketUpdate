@@ -79,8 +79,12 @@ const MatchCards = () => {
   const showMoreMatches = () => {
     setMatchesToShow(matchesToShow + moreMatches);
   };
+
   return (
     <>
+      <div className="w-full p-2 font-extrabold text-xl sm:text-3xl">
+        <p>{cricSeriesData?.data?.info?.name}</p>
+      </div>
       {cricSeriesData?.data?.matchList
         ?.filter((cricMatch) => {
           return cricMatch.status !== "Match not started";
