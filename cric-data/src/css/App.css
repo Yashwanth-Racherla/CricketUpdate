@@ -1,5 +1,9 @@
+.nav-bar{
+  @apply bg-gradient-to-r from-[#cc2b5e] to-[#753a88] text-white text-3xl p-4 text-center;
+}
+
 .show-popUp {
-  @apply bg-black bg-opacity-80 fixed z-10 w-full h-full top-0 left-0;
+  @apply  bg-black bg-opacity-80 fixed z-10 w-full h-full top-0 left-0;
 }
 .show-popUp-data {
   @apply bg-white w-full max-w-2xl h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 text-sm overflow-y-scroll;
@@ -17,5 +21,7 @@
   @apply flex flex-col items-center;
 }
 .btn {
-  @apply bg-[#a881af] text-white p-2 border-[1px] border-collapse border-black;
+  @apply bg-gradient-to-r from-[#960ead] to-[#0ad8c7]
+  hover:bg-gradient-to-r from-[#0ad8c7] to-[#960ead]
+  text-white p-2 border-[1px] border-collapse border-black;
 }

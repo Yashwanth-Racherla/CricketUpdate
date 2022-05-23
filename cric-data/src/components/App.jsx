@@ -1,5 +1,5 @@
 import "../css/App.css";
-import MatchCard from "./matchCard";
+import MatchCards from "./matchCards";
 import NavigationBar from "./navigationBar";
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
     <>
       <NavigationBar />
       <div className="md:flex md:justify-center md:flex-wrap">
-        <MatchCard />
+        <MatchCards />
       </div>
     </>
   );
