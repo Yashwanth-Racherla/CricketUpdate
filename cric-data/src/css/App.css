@@ -10,7 +10,7 @@
 }
 
 .close-popUp {
-  @apply hover:scale-110 text-3xl absolute top-0 right-[2%];
+  @apply hover:scale-110 text-3xl fixed top-0 right-[2%];
 }
 
 .match-data {

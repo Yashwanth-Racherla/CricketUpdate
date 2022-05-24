@@ -15,8 +15,8 @@ const MatchCards = () => {
   // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
   // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
-  const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
+  const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
+  // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
 
   const byDate = (a, b) => {
     if (new Date(a.dateTimeGMT).valueOf() > new Date(b.dateTimeGMT).valueOf()) {
@@ -46,6 +46,11 @@ const MatchCards = () => {
       name: "UgandaVsNepal",
     },
   ];
+
+  const moreMatches = 1;
+  const initialMatches = 3;
+  const [numOfMatchesToShow, setNumOfMatchesToShow] = useState([]);
+
   const getSeriesData = async () => {
     const tempSeriesArr = [];
 
@@ -57,6 +62,9 @@ const MatchCards = () => {
       await seriesApiData.json().then((res) => {
         res.data?.matchList?.sort(byDate);
         tempSeriesArr.push(res);
+
+        setNumOfMatchesToShow((prevState) => [...prevState, initialMatches]);
+        // setCricSeriesData((prevState) => [...prevState, initialMatches])
         setCricSeriesData(tempSeriesArr);
       });
     }
@@ -96,17 +104,19 @@ const MatchCards = () => {
   //  ====================================================================
   //  showMoreMatches function called on jsx button element (More Matches)
   //  ====================================================================
-  const moreMatches = 1;
-  const [matchesToShow, setMatchesToShow] = useState(3);
-  const showMoreMatches = () => {
-    setMatchesToShow(matchesToShow + moreMatches);
+
+  const showMoreMatches = (index) => {
+    setNumOfMatchesToShow((prevState) => [
+      ...prevState,
+      (prevState[index] += moreMatches),
+    ]);
   };
 
   return (
     <>
-      {cricSeriesData.map((series) => {
+      {cricSeriesData.map((series, index) => {
         return (
-          <React.Fragment key={series.id}>
+          <React.Fragment key={`series-${index}`}>
             <div className="p-2 font-extrabold text-xl sm:text-3xl">
               <p>{series?.data?.info?.name}</p>
             </div>
@@ -115,7 +125,7 @@ const MatchCards = () => {
                 ?.filter((cricMatch) => {
                   return cricMatch.status !== "Match not started";
                 })
-                .slice(0, matchesToShow)
+                .slice(0, numOfMatchesToShow[index])
                 .map((cricMatch) => {
                   return (
                     <MatchCard
@@ -127,13 +137,13 @@ const MatchCards = () => {
                 })}
             </div>
 
-            {matchesToShow <
+            {numOfMatchesToShow[index] <
               series?.data?.matchList.filter((cricMatch) => {
                 return cricMatch.status !== "Match not started";
               }).length && (
               <button
                 className="btn p-2 m-2 text-blue-600 font-bold text-xl"
-                onClick={() => showMoreMatches()}
+                onClick={() => showMoreMatches(index)}
               >
                 More matches
               </button>
@@ -145,6 +155,13 @@ const MatchCards = () => {
       {showMatchDataPopup && (
         <div className="show-popUp">
           <div className="show-popUp-data">
+            {/* ======= close the pop up button ====== */}
+            <button className="close-popUp">
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => closeMatchData()}
+              />
+            </button>
             {/* ======= Match Status ======  */}
             <h2 className="font-bold py-4 text-lg sm:text-xl">
               {cricMatchData.status}
@@ -170,13 +187,7 @@ const MatchCards = () => {
             <MatchScorecard
               scoreCardData={cricMatchScoreCard?.scorecard[inningsNumber]}
             />
-            {/* ======= close the pop up button ====== */}
-            <button className="close-popUp">
-              <FontAwesomeIcon
-                icon={faXmark}
-                onClick={() => closeMatchData()}
-              />
-            </button>
+
             {/* ======= Match Details ====== */}
             <div className="pt-8 sm:text-lg">
               <div className="font-semibold">
