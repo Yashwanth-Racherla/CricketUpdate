@@ -72,7 +72,10 @@ const MatchScorecard = ({ scoreCardData }) => {
         </div>
         {scoreCardData?.bowling.map((person) => {
           return (
-            <div className="flex justify-between p-2 text-center border-b-2">
+            <div
+              key={person.bowler.name}
+              className="flex justify-between p-2 text-center border-b-2"
+            >
               <p className="text-left w-24 font-semibold">
                 {person.bowler.name}
               </p>

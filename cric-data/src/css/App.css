@@ -14,7 +14,7 @@
 }
 
 .match-data {
-  @apply border-[1px] border-black p-5 m-2 text-center font-semibold md:w-[45%] lg:w-[30%];
+  @apply border-[1px] border-black p-5 m-2 text-center font-semibold w-full;
 }
 
 .team-vs-team {

@@ -4,6 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import MatchScorecard from "./matchScorecard";
 import MatchCard from "./matchCard";
+import Slider from "react-slick";
+// import SampleNextArrow from "./sampleNextArrow";
+// import SamplePrevArrow from "./samplePrevArrow";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MatchCards = () => {
   const [cricSeriesData, setCricSeriesData] = useState([]);
@@ -11,11 +16,12 @@ const MatchCards = () => {
   const [cricMatchScoreCard, setCricMatchScoreCard] = useState(null);
   const [showMatchDataPopup, setShowMatchDataPopup] = useState(false);
   const [inningsNumber, setInningsNumber] = useState(0);
+  const [numOfMatchesToShow, setNumOfMatchesToShow] = useState([]);
 
-  // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
+  const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
   // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
+  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
   // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
 
   const byDate = (a, b) => {
@@ -49,7 +55,6 @@ const MatchCards = () => {
 
   const moreMatches = 1;
   const initialMatches = 3;
-  const [numOfMatchesToShow, setNumOfMatchesToShow] = useState([]);
 
   const getSeriesData = async () => {
     const tempSeriesArr = [];
@@ -62,10 +67,10 @@ const MatchCards = () => {
       await seriesApiData.json().then((res) => {
         res.data?.matchList?.sort(byDate);
         tempSeriesArr.push(res);
+        setCricSeriesData(tempSeriesArr);
 
         setNumOfMatchesToShow((prevState) => [...prevState, initialMatches]);
-        // setCricSeriesData((prevState) => [...prevState, initialMatches])
-        setCricSeriesData(tempSeriesArr);
+        // setCricSeriesData((prevState) => [...prevState, initialMatches]);
       });
     }
   };
@@ -115,12 +120,22 @@ const MatchCards = () => {
   return (
     <>
       {cricSeriesData.map((series, index) => {
+        const settings = {
+          dots: true,
+          infinite: false,
+          speed: 500,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          // nextArrow: <SampleNextArrow />,
+          // prevArrow: <SamplePrevArrow />,
+        };
         return (
           <React.Fragment key={`series-${index}`}>
             <div className="p-2 font-extrabold text-xl sm:text-3xl">
               <p>{series?.data?.info?.name}</p>
             </div>
-            <div className="md:flex md:justify-center md:flex-wrap">
+            <Slider {...settings}>
+              {/* <div className="md:flex md:justify-center md:flex-wrap"> */}
               {series?.data?.matchList
                 ?.filter((cricMatch) => {
                   return cricMatch.status !== "Match not started";
@@ -135,7 +150,8 @@ const MatchCards = () => {
                     />
                   );
                 })}
-            </div>
+              {/* </div> */}
+            </Slider>
 
             {numOfMatchesToShow[index] <
               series?.data?.matchList.filter((cricMatch) => {
