@@ -6,9 +6,9 @@ const MatchCard = ({ cricMatch, showMatchData }) => {
       <div className="match-data">
         {cricMatch?.teamInfo?.length > 1 ? (
           <>
-            <p className="pb-2 h-14">{cricMatch?.name}</p>
+            <p className="pb-2 min-h-[56px]">{cricMatch?.name}</p>
 
-            <div className="flex justify-center h-[128px] sm:h-[152px]">
+            <div className="flex justify-center min-h-[128px] sm:min-h-[152px]">
               <div className="team-vs-team w-2/5">
                 <img
                   className="w-20"

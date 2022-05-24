@@ -5,8 +5,6 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import MatchScorecard from "./matchScorecard";
 import MatchCard from "./matchCard";
 import Slider from "react-slick";
-// import SampleNextArrow from "./sampleNextArrow";
-// import SamplePrevArrow from "./samplePrevArrow";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
@@ -54,7 +52,7 @@ const MatchCards = () => {
   ];
 
   const moreMatches = 1;
-  const initialMatches = 3;
+  const initialMatches = 10;
 
   const getSeriesData = async () => {
     const tempSeriesArr = [];
@@ -111,59 +109,74 @@ const MatchCards = () => {
   //  ====================================================================
 
   const showMoreMatches = (index) => {
-    setNumOfMatchesToShow((prevState) => [
-      ...prevState,
-      (prevState[index] += moreMatches),
-    ]);
+    // setNumOfMatchesToShow((prevState) => [
+    //   ...prevState,
+    //   (prevState[index] += moreMatches),
+    // ]);
   };
 
   return (
     <>
       {cricSeriesData.map((series, index) => {
         const settings = {
-          dots: true,
           infinite: false,
           speed: 500,
           slidesToShow: 3,
           slidesToScroll: 1,
-          // nextArrow: <SampleNextArrow />,
-          // prevArrow: <SamplePrevArrow />,
+          responsive: [
+            {
+              breakpoint: 1200,
+              settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1,
+              },
+            },
+            {
+              breakpoint: 700,
+              settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1,
+              },
+            },
+          ],
         };
         return (
           <React.Fragment key={`series-${index}`}>
-            <div className="p-2 font-extrabold text-xl sm:text-3xl">
-              <p>{series?.data?.info?.name}</p>
-            </div>
-            <Slider {...settings}>
-              {/* <div className="md:flex md:justify-center md:flex-wrap"> */}
-              {series?.data?.matchList
-                ?.filter((cricMatch) => {
-                  return cricMatch.status !== "Match not started";
-                })
-                .slice(0, numOfMatchesToShow[index])
-                .map((cricMatch) => {
-                  return (
-                    <MatchCard
-                      key={cricMatch?.id}
-                      cricMatch={cricMatch}
-                      showMatchData={showMatchData}
-                    />
-                  );
-                })}
-              {/* </div> */}
-            </Slider>
+            <div className="mb-10">
+              <div className="p-2 font-extrabold text-xl sm:text-3xl">
+                <p className="text-center">{series?.data?.info?.name}</p>
+              </div>
+              <Slider {...settings}>
+                {/* <div className="md:flex md:justify-center md:flex-wrap"> */}
+                {series?.data?.matchList
+                  ?.filter((cricMatch) => {
+                    return cricMatch.status !== "Match not started";
+                  })
+                  .slice(0, numOfMatchesToShow[index])
+                  .map((cricMatch) => {
+                    return (
+                      <MatchCard
+                        key={cricMatch?.id}
+                        cricMatch={cricMatch}
+                        showMatchData={showMatchData}
+                      />
+                    );
+                  })}
+                {/* </div> */}
+              </Slider>
 
-            {numOfMatchesToShow[index] <
-              series?.data?.matchList.filter((cricMatch) => {
-                return cricMatch.status !== "Match not started";
-              }).length && (
-              <button
-                className="btn p-2 m-2 text-blue-600 font-bold text-xl"
-                onClick={() => showMoreMatches(index)}
-              >
-                More matches
-              </button>
-            )}
+              {numOfMatchesToShow[index] <
+                series?.data?.matchList.filter((cricMatch) => {
+                  return cricMatch.status !== "Match not started";
+                }).length && (
+                <button
+                  className="btn p-2 m-2 text-blue-600 font-bold text-xl"
+                  onClick={() => showMoreMatches(index)}
+                >
+                  More matches
+                </button>
+              )}
+            </div>
           </React.Fragment>
         );
       })}
