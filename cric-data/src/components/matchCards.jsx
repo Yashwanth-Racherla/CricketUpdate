@@ -13,13 +13,14 @@ const MatchCards = () => {
   const [cricMatchData, setcricMatchData] = useState(null);
   const [cricMatchScoreCard, setCricMatchScoreCard] = useState(null);
   const [showMatchDataPopup, setShowMatchDataPopup] = useState(false);
-  const [inningsNumber, setInningsNumber] = useState(0);
-  const [numOfMatchesToShow, setNumOfMatchesToShow] = useState([]);
+  const [showSeriesDataPopup, setShowSeriesDataPopup] = useState(false);
+  const [activeInningsNum, setActiveInningsNum] = useState(0);
+  const [activeSeriesNum, setActiveSeriesNum] = useState();
 
-  const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
+  // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
   // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
+  const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
   // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
 
   const byDate = (a, b) => {
@@ -33,6 +34,7 @@ const MatchCards = () => {
       return 0;
     }
   };
+
   //  =================================
   //  Multiple Series Fetching Api
   //  =================================
@@ -51,9 +53,6 @@ const MatchCards = () => {
     },
   ];
 
-  const moreMatches = 1;
-  const initialMatches = 10;
-
   const getSeriesData = async () => {
     const tempSeriesArr = [];
 
@@ -66,9 +65,6 @@ const MatchCards = () => {
         res.data?.matchList?.sort(byDate);
         tempSeriesArr.push(res);
         setCricSeriesData(tempSeriesArr);
-
-        setNumOfMatchesToShow((prevState) => [...prevState, initialMatches]);
-        // setCricSeriesData((prevState) => [...prevState, initialMatches]);
       });
     }
   };
@@ -78,7 +74,16 @@ const MatchCards = () => {
   }, []);
 
   //  ====================================================================
-  //  showMatchData() function called on jsx button element ( Match Details )
+  //  showSeriesData function called on jsx button element (Show Series Details)
+  //  ====================================================================
+  const showSeriesData = (id) => {
+    setActiveSeriesNum(id);
+    setShowSeriesDataPopup(true);
+    document.querySelector("body").style.overflow = "hidden";
+  };
+
+  //  ====================================================================
+  //  showMatchData() function called on jsx button element ( Show Match Details )
   //  ====================================================================
 
   const showMatchData = async (id) => {
@@ -95,6 +100,15 @@ const MatchCards = () => {
       setCricMatchScoreCard(res.data);
       setShowMatchDataPopup(true);
     });
+    document.querySelector("body").style.overflow = "hidden";
+  };
+
+  //  ====================================================================
+  //  closeSeriesData() function called on jsx button element( X Button)
+  //  ====================================================================
+  const closeSeriesData = () => {
+    setShowSeriesDataPopup(false);
+    document.querySelector("body").style.overflow = "auto";
   };
 
   //  ====================================================================
@@ -102,17 +116,8 @@ const MatchCards = () => {
   //  ====================================================================
   const closeMatchData = () => {
     setShowMatchDataPopup(false);
-    setInningsNumber(0);
-  };
-  //  ====================================================================
-  //  showMoreMatches function called on jsx button element (More Matches)
-  //  ====================================================================
-
-  const showMoreMatches = (index) => {
-    // setNumOfMatchesToShow((prevState) => [
-    //   ...prevState,
-    //   (prevState[index] += moreMatches),
-    // ]);
+    setActiveInningsNum(0);
+    document.querySelector("body").style.overflow = "auto";
   };
 
   return (
@@ -141,49 +146,78 @@ const MatchCards = () => {
           ],
         };
         return (
-          <React.Fragment key={`series-${index}`}>
-            <div className="mb-10">
-              <div className="p-2 font-extrabold text-xl sm:text-3xl">
-                <p className="text-center">{series?.data?.info?.name}</p>
-              </div>
-              <Slider {...settings}>
-                {/* <div className="md:flex md:justify-center md:flex-wrap"> */}
-                {series?.data?.matchList
-                  ?.filter((cricMatch) => {
-                    return cricMatch.status !== "Match not started";
-                  })
-                  .slice(0, numOfMatchesToShow[index])
-                  .map((cricMatch) => {
-                    return (
-                      <MatchCard
-                        key={cricMatch?.id}
-                        cricMatch={cricMatch}
-                        showMatchData={showMatchData}
-                      />
-                    );
-                  })}
-                {/* </div> */}
-              </Slider>
-
-              {numOfMatchesToShow[index] <
-                series?.data?.matchList.filter((cricMatch) => {
-                  return cricMatch.status !== "Match not started";
-                }).length && (
-                <button
-                  className="btn p-2 m-2 text-blue-600 font-bold text-xl"
-                  onClick={() => showMoreMatches(index)}
-                >
-                  More matches
-                </button>
-              )}
+          <div key={`series-${index}`} className="mb-10">
+            <div className="p-2 font-extrabold text-xl sm:text-3xl">
+              <p className="text-center">{series?.data?.info?.name}</p>
             </div>
-          </React.Fragment>
+            <Slider {...settings}>
+              {series?.data?.matchList
+                ?.filter((cricMatch) => {
+                  return cricMatch.status !== "Match not started";
+                })
+                .slice(0, 5)
+                .map((cricMatch) => {
+                  return (
+                    <MatchCard
+                      key={cricMatch?.id}
+                      cricMatch={cricMatch}
+                      className="h-full w-full"
+                      showMatchData={showMatchData}
+                    />
+                  );
+                })}
+            </Slider>
+
+            <button
+              className="btn p-2 m-2 text-blue-600 font-bold text-xl"
+              onClick={() => showSeriesData(index)}
+            >
+              Show Series Details
+            </button>
+          </div>
         );
       })}
 
+      {showSeriesDataPopup && (
+        <div className="show-popUp">
+          <div className="show-popUp-data ">
+            {/* ======= close the pop up button ====== */}
+            <button className="close-popUp">
+              <FontAwesomeIcon
+                icon={faXmark}
+                onClick={() => closeSeriesData()}
+              />
+            </button>
+            <div className="p-2 font-extrabold text-xl sm:text-3xl mt-6">
+              <p className="text-center">
+                {cricSeriesData[activeSeriesNum]?.data?.info?.name}
+              </p>
+            </div>
+            {/* ======= Show All matches in a series ====== */}
+
+            <div className="flex flex-wrap">
+              {cricSeriesData[activeSeriesNum]?.data?.matchList
+                ?.filter((cricMatch) => {
+                  return cricMatch.status !== "Match not started";
+                })
+                .map((cricMatch) => {
+                  return (
+                    <MatchCard
+                      key={cricMatch?.id}
+                      cricMatch={cricMatch}
+                      className="h-auto w-full sm:w-[48%] lg:w-[30%] mx-auto my-2"
+                      showMatchData={showMatchData}
+                    />
+                  );
+                })}
+            </div>
+          </div>
+        </div>
+      )}
+
       {showMatchDataPopup && (
         <div className="show-popUp">
-          <div className="show-popUp-data">
+          <div className="show-popUp-data max-w-3xl">
             {/* ======= close the pop up button ====== */}
             <button className="close-popUp">
               <FontAwesomeIcon
@@ -201,7 +235,7 @@ const MatchCards = () => {
                 return (
                   <button
                     className="w-1/2 btn flex flex-col items-center font-bold sm:text-base"
-                    onClick={() => setInningsNumber(index)}
+                    onClick={() => setActiveInningsNum(index)}
                   >
                     <span>{teamScoreCard.inning.replace("Inning 1", "")}</span>
                     <span>
@@ -214,7 +248,7 @@ const MatchCards = () => {
             </div>
             {/* ====== Match Scorecard Component ===== */}
             <MatchScorecard
-              scoreCardData={cricMatchScoreCard?.scorecard[inningsNumber]}
+              scoreCardData={cricMatchScoreCard?.scorecard[activeInningsNum]}
             />
 
             {/* ======= Match Details ====== */}

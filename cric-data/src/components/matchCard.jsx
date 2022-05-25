@@ -1,12 +1,12 @@
 import React from "react";
 
-const MatchCard = ({ cricMatch, showMatchData }) => {
+const MatchCard = ({ cricMatch, showMatchData, className }) => {
   return (
     <>
-      <div className="match-data">
+      <div className={`match-data ${className}`}>
         {cricMatch?.teamInfo?.length > 1 ? (
           <>
-            <p className="pb-2 min-h-[56px]">{cricMatch?.name}</p>
+            <p className="pb-2 min-h-[56px] text-base">{cricMatch?.name}</p>
 
             <div className="flex justify-center min-h-[128px] sm:min-h-[152px]">
               <div className="team-vs-team w-2/5">
@@ -18,7 +18,7 @@ const MatchCard = ({ cricMatch, showMatchData }) => {
                 <p> {cricMatch?.teamInfo[0]?.name} </p>
               </div>
               <div className="team-vs-team w-1/5">
-                <img className="w-16" src="./vs image.jpg" alt="vs logo" />
+                <img className="w-14" src="./vs image.jpg" alt="vs logo" />
               </div>
               <div className="team-vs-team w-2/5">
                 <img

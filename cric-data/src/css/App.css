@@ -6,7 +6,7 @@
   @apply bg-black bg-opacity-80 fixed z-10 w-full h-full top-0 left-0;
 }
 .show-popUp-data {
-  @apply bg-white w-full max-w-2xl h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 text-sm overflow-y-scroll;
+  @apply bg-white w-full h-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-2 text-sm overflow-y-scroll;
 }
 
 .close-popUp {
@@ -14,7 +14,7 @@
 }
 
 .match-data {
-  @apply border-[1px] border-black p-5 text-center font-semibold w-full h-full;
+  @apply border-[1px] border-black p-5 text-center font-semibold;
 }
 
 .team-vs-team {
