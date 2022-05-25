@@ -15,13 +15,13 @@ const MatchCards = () => {
   const [showMatchDataPopup, setShowMatchDataPopup] = useState(false);
   const [showSeriesDataPopup, setShowSeriesDataPopup] = useState(false);
   const [activeInningsNum, setActiveInningsNum] = useState(0);
-  const [activeSeriesNum, setActiveSeriesNum] = useState();
+  const [activeSeriesNum, setActiveSeriesNum] = useState(null);
 
   // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
   // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
   // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
-  // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
+  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
+  const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
 
   const byDate = (a, b) => {
     if (new Date(a.dateTimeGMT).valueOf() > new Date(b.dateTimeGMT).valueOf()) {
@@ -146,7 +146,7 @@ const MatchCards = () => {
           ],
         };
         return (
-          <div key={`series-${index}`} className="mb-10">
+          <div key={`series-${index}`} className="mb-4">
             <div className="p-2 font-extrabold text-xl sm:text-3xl">
               <p className="text-center">{series?.data?.info?.name}</p>
             </div>
@@ -169,7 +169,7 @@ const MatchCards = () => {
             </Slider>
 
             <button
-              className="btn p-2 m-2 text-blue-600 font-bold text-xl"
+              className="btn p-2 my-2 mx-auto block text-blue-600 font-bold text-xl"
               onClick={() => showSeriesData(index)}
             >
               Show Series Details
