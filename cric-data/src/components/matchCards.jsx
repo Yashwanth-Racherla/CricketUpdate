@@ -41,15 +41,23 @@ const MatchCards = () => {
   const seriesList = [
     {
       id: "47b54677-34de-4378-9019-154e82b9cc1a",
-      name: "IPL",
+      name: "Indian Premier League 2022",
     },
     {
       id: "b5108aba-0694-42c4-b9eb-8f5eda5a41c7",
-      name: "BangladeshVsSrilanka",
+      name: "Srilanka Tour of Bangladesh",
     },
     {
       id: "17976dfb-1371-488c-b420-c7d2e2cd7d14",
-      name: "UgandaVsNepal",
+      name: "Uganda Tour of Nepal",
+    },
+    {
+      id: "85754fc3-d76e-4afc-9269-e4d49771d80f",
+      namee: "Womens T20 Challenge",
+    },
+    {
+      id: "2e4a95c4-a1a4-4ac7-8a98-f549a08ee3c5",
+      namee: "Srilanka Women Tour of Pakistan",
     },
   ];
 
@@ -196,11 +204,8 @@ const MatchCards = () => {
             {/* ======= Show All matches in a series ====== */}
 
             <div className="flex flex-wrap">
-              {cricSeriesData[activeSeriesNum]?.data?.matchList
-                ?.filter((cricMatch) => {
-                  return cricMatch.status !== "Match not started";
-                })
-                .map((cricMatch) => {
+              {cricSeriesData[activeSeriesNum]?.data?.matchList?.map(
+                (cricMatch) => {
                   return (
                     <MatchCard
                       key={cricMatch?.id}
@@ -209,7 +214,8 @@ const MatchCards = () => {
                       showMatchData={showMatchData}
                     />
                   );
-                })}
+                }
+              )}
             </div>
           </div>
         </div>
@@ -234,7 +240,7 @@ const MatchCards = () => {
               {cricMatchScoreCard?.scorecard?.map((teamScoreCard, index) => {
                 return (
                   <button
-                    className="w-1/2 btn flex flex-col items-center font-bold sm:text-base"
+                    className="w-1/2 btn flex flex-col items-center justify-between font-bold sm:text-base"
                     onClick={() => setActiveInningsNum(index)}
                   >
                     <span>{teamScoreCard.inning.replace("Inning 1", "")}</span>

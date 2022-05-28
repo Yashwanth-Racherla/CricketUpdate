@@ -17,7 +17,7 @@ const MatchScorecard = ({ scoreCardData }) => {
         {/* ====================================================================
         Batsman scorecard
         ==================================================================== */}
-        <div className="flex justify-between font-bold p-2 mb-2 text-center bg-gray-400">
+        <div className="flex justify-between font-bold p-2 mb-2 text-center bg-gray-400 text-base">
           <div className="text-left sm:flex">
             <div className="w-28 mr-8">Batsman</div>
             <div className="w-28"></div>
@@ -60,7 +60,7 @@ const MatchScorecard = ({ scoreCardData }) => {
         {/* ====================================================================
         Bowler scorecard 
         ==================================================================== */}
-        <div className="flex justify-between font-bold p-2 mb-2 text-center bg-gray-400">
+        <div className="flex justify-between font-bold p-2 mb-2 text-center bg-gray-400 text-base">
           <p className="text-left w-24">Bowler</p>
           <p className="w-4">O</p>
           <p className="w-4">M</p>
