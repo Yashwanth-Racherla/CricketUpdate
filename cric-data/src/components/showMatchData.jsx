@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import MatchScorecard from "./matchScorecard";
+import { Link } from "react-router-dom";
 
 const ShowMatchData = ({
   closeMatchData,
@@ -15,7 +16,9 @@ const ShowMatchData = ({
       <div className="show-popUp-data max-w-3xl">
         {/* ======= close the pop up button ====== */}
         <button className="close-popUp">
-          <FontAwesomeIcon icon={faXmark} onClick={() => closeMatchData()} />
+          <Link to="/">
+            <FontAwesomeIcon icon={faXmark} onClick={() => closeMatchData()} />
+          </Link>
         </button>
         {/* ======= Match Status ======  */}
         <h2 className="font-bold py-4 text-lg sm:text-xl">

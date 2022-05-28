@@ -7,6 +7,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../css/App.css";
+import { Routes, Route, Link } from "react-router-dom";
 
 const App = () => {
   const [cricSeriesData, setCricSeriesData] = useState([]);
@@ -18,8 +19,8 @@ const App = () => {
   const [activeSeriesNum, setActiveSeriesNum] = useState(null);
 
   // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
-  const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
-  // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
+  // const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
+  const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
   // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
   // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
 
@@ -182,30 +183,41 @@ const App = () => {
               className="btn p-2 my-2 mx-auto block text-blue-600 font-bold text-xl"
               onClick={() => showSeriesData(index)}
             >
-              Show Series Details
+              <Link to="/SeriesDetails">Show Series Details</Link>
             </button>
           </div>
         );
       })}
 
-      {showSeriesDataPopup && (
-        <ShowSeriesData
-          activeSeriesNum={activeSeriesNum}
-          cricSeriesData={cricSeriesData}
-          showMatchData={showMatchData}
-          closeSeriesData={closeSeriesData}
+      <Routes>
+        <Route
+          path="/SeriesDetails"
+          element={
+            showSeriesDataPopup && (
+              <ShowSeriesData
+                activeSeriesNum={activeSeriesNum}
+                cricSeriesData={cricSeriesData}
+                showMatchData={showMatchData}
+                closeSeriesData={closeSeriesData}
+              />
+            )
+          }
         />
-      )}
-
-      {showMatchDataPopup && (
-        <ShowMatchData
-          closeMatchData={closeMatchData}
-          cricMatchData={cricMatchData}
-          cricMatchScoreCard={cricMatchScoreCard}
-          activeInningsNum={activeInningsNum}
-          setActiveInningsNum={setActiveInningsNum}
+        <Route
+          path="/MatchDetails"
+          element={
+            showMatchDataPopup && (
+              <ShowMatchData
+                closeMatchData={closeMatchData}
+                cricMatchData={cricMatchData}
+                cricMatchScoreCard={cricMatchScoreCard}
+                activeInningsNum={activeInningsNum}
+                setActiveInningsNum={setActiveInningsNum}
+              />
+            )
+          }
         />
-      )}
+      </Routes>
     </>
   );
 };

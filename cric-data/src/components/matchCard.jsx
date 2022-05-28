@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MatchCard = ({ cricMatch, showMatchData, className }) => {
   return (
@@ -41,7 +42,7 @@ const MatchCard = ({ cricMatch, showMatchData, className }) => {
             className="btn m-2"
             onClick={() => showMatchData(cricMatch.id)}
           >
-            Show Match Details
+            <Link to="/MatchDetails"> Show Match Details</Link>
           </button>
           <p className="font-bold text-lg">{cricMatch?.status}</p>
         </div>

@@ -2,6 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import MatchCard from "./matchCard";
+import { Link } from "react-router-dom";
 
 const ShowSeriesData = ({
   activeSeriesNum,
@@ -14,7 +15,9 @@ const ShowSeriesData = ({
       <div className="show-popUp-data ">
         {/* ======= close the pop up button ====== */}
         <button className="close-popUp">
-          <FontAwesomeIcon icon={faXmark} onClick={() => closeSeriesData()} />
+          <Link to="/">
+            <FontAwesomeIcon icon={faXmark} onClick={() => closeSeriesData()} />
+          </Link>
         </button>
         <div className="p-2 font-extrabold text-xl sm:text-3xl mt-6">
           <p className="text-center">
