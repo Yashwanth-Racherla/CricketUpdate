@@ -1,10 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import MatchScorecard from "./matchScorecard";
+import MatchScorecard from "../components/matchScorecard";
 import { Link } from "react-router-dom";
 
-const ShowMatchData = ({
+const MatchDetails = ({
   closeMatchData,
   cricMatchData,
   cricMatchScoreCard,
@@ -73,4 +73,4 @@ const ShowMatchData = ({
   );
 };
 
-export default ShowMatchData;
+export default MatchDetails;

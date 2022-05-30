@@ -1,15 +1,16 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import MatchCard from "./matchCard";
+import MatchCard from "../components/matchCard";
 import { Link } from "react-router-dom";
 
-const ShowSeriesData = ({
+const SeriesDetails = ({
   activeSeriesNum,
   cricSeriesData,
   showMatchData,
   closeSeriesData,
 }) => {
+  console.log(activeSeriesNum);
   return (
     <div className="show-popUp">
       <div className="show-popUp-data ">
@@ -47,4 +48,4 @@ const ShowSeriesData = ({
   );
 };
 
-export default ShowSeriesData;
+export default SeriesDetails;
