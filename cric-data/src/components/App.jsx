@@ -1,10 +1,9 @@
 import NavigationBar from "./navigationBar";
-import MatchDetails from "../pages/MatchDetails";
+// import MatchDetails from "../pages/MatchDetails";
 import SeriesDetails from "../pages/SeriesDetails";
 import "../css/App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "../pages/Home";
-import Test from "../pages/test";
 
 const App = () => {
   return (
@@ -13,21 +12,8 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/test" element={<Test />} />
-        <Route path="/seriesdetails" element={<SeriesDetails />} />
 
-        {/* <Route
-          path="/seriesdetails"
-          exact
-          element={
-            <SeriesDetails
-              activeSeriesNum={activeSeriesNum}
-              cricSeriesData={cricSeriesData}
-              showMatchData={showMatchData}
-              closeSeriesData={closeSeriesData}
-            />
-          }
-        /> */}
+        <Route path="/seriesdetails/:id" element={<SeriesDetails />} />
         {/*<Route
           path="/MatchDetails"
           exact
