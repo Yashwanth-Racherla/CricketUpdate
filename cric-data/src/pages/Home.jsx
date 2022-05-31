@@ -3,23 +3,18 @@ import MatchCard from "../components/matchCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Routes, Route, Link } from "react-router-dom";
-import { byDate } from "../helper/commonFunctions";
+import { Link } from "react-router-dom";
+import { byDate } from "../helperFunctions/commonFunctions";
+import { getApiKey } from "../helperData/commonData";
 
 const Home = () => {
   const [cricSeriesData, setCricSeriesData] = useState([]);
   const [cricMatchData, setcricMatchData] = useState(null);
   const [cricMatchScoreCard, setCricMatchScoreCard] = useState(null);
-  // const [showMatchDataPopup, setShowMatchDataPopup] = useState(false);
-  // const [showSeriesDataPopup, setShowSeriesDataPopup] = useState(false);
   const [activeInningsNum, setActiveInningsNum] = useState(0);
   const [activeSeriesNum, setActiveSeriesNum] = useState(null);
 
-  // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
-  const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
-  // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
-  // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
+  const apiKey = getApiKey();
 
   //  =================================
   //  Multiple Series Fetching Api
@@ -65,11 +60,8 @@ const Home = () => {
 
   useEffect(() => {
     getSeriesData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  //  ====================================================================
-  //  showMatchData() function called on jsx button element ( Show Match Details )
-  //  ====================================================================
 
   const showMatchData = async (id) => {
     const matchApiData = await fetch(
@@ -83,30 +75,10 @@ const Home = () => {
     });
     await matchScoreCardApiData.json().then((res) => {
       setCricMatchScoreCard(res.data);
-      // setShowMatchDataPopup(true);
     });
-    // document.querySelector("body").style.overflow = "hidden";
-  };
-
-  //  ====================================================================
-  //  closeSeriesData() function called on jsx button element( X Button)
-  //  ====================================================================
-  // const closeSeriesData = () => {
-  //   // setShowSeriesDataPopup(false);
-  //   document.querySelector("body").style.overflow = "auto";
-  // };
-
-  //  ====================================================================
-  //  closeMatchData() function called on jsx button element( X Button)
-  //  ====================================================================
-  const closeMatchData = () => {
-    // setShowMatchDataPopup(false);
-    setActiveInningsNum(0);
-    // document.querySelector("body").style.overflow = "auto";
   };
 
   return cricSeriesData.map((series, index) => {
-    console.log(cricSeriesData.length);
     const settings = {
       infinite: false,
       speed: 500,

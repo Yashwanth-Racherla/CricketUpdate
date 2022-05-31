@@ -4,18 +4,14 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import MatchCard from "../components/matchCard";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import { byDate } from "../helper/commonFunctions";
+import { byDate } from "../helperFunctions/commonFunctions";
+import { getApiKey } from "../helperData/commonData";
 
 const SeriesDetails = () => {
-  let { id } = useParams();
+  const { id } = useParams();
+  const apiKey = getApiKey();
 
   const [seriesData, setSeriesData] = useState({});
-
-  // const apiKey = "2f0d633d-aed1-474b-9fa4-8bb1af008ca9";
-  const apiKey = "8474bb0f-cb30-48bc-8272-1cc7a31e3dee";
-  // const apiKey = "af3ef40f-1364-4e71-9ae1-dc153e43f49d";
-  // const apiKey = "ce2ea15b-deaf-491b-a809-7367ab6d9024";
-  // const apiKey = "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd";
 
   const getSeriesData = async () => {
     const seriesApiData = await fetch(
@@ -30,6 +26,7 @@ const SeriesDetails = () => {
 
   useEffect(() => {
     getSeriesData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

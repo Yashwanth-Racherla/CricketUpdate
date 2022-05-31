@@ -42,7 +42,7 @@ const MatchCard = ({ cricMatch, showMatchData, className }) => {
             className="btn m-2"
             onClick={() => showMatchData(cricMatch.id)}
           >
-            <Link to="/MatchDetails"> Show Match Details</Link>
+            <Link to={`/matchdetails/${cricMatch.id}`}>Show Match Details</Link>
           </button>
           <p className="font-bold text-lg">{cricMatch?.status}</p>
         </div>
