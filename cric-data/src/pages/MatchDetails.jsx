@@ -32,7 +32,7 @@ const MatchDetails = () => {
 
   return (
     <div className="show-popUp">
-      <div className="show-popUp-data max-w-3xl">
+      <div className="show-popUp-data">
         {/* ======= close the pop up button ====== */}
         <button className="close-popUp">
           <Link to="/">

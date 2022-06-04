@@ -42,9 +42,8 @@ const Home = () => {
     },
   ];
 
+  // const tempSeriesArr = [];
   const getSeriesData = async () => {
-    const tempSeriesArr = [];
-
     for (const series of seriesList) {
       const seriesApiData = await fetch(
         `https://api.cricapi.com/v1/series_info?apikey=${apiKey}&offset=0&id=${series.id}`
@@ -52,8 +51,9 @@ const Home = () => {
 
       await seriesApiData.json().then((res) => {
         res.data?.matchList?.sort(byDate);
-        tempSeriesArr.push(res);
-        setCricSeriesData(tempSeriesArr);
+        // tempSeriesArr.push(res);
+        // setCricSeriesData(tempSeriesArr);
+        setCricSeriesData((prevState) => [...prevState, res]);
       });
     }
   };
@@ -62,6 +62,12 @@ const Home = () => {
     getSeriesData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
+  //   // setCricSeriesData(tempSeriesArr);
+  //   console.log(tempSeriesArr.length);
+  //   if (tempSeriesArr.length === seriesList.length) console.log("hello");
+  // });
 
   const showMatchData = async (id) => {
     const matchApiData = await fetch(
