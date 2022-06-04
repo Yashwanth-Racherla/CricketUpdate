@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MatchCard = ({ cricMatch, showMatchData, className }) => {
   return (
@@ -18,7 +19,7 @@ const MatchCard = ({ cricMatch, showMatchData, className }) => {
                 <p> {cricMatch?.teamInfo[0]?.name} </p>
               </div>
               <div className="team-vs-team w-1/5">
-                <img className="w-14" src="./vs_image.jpg" alt="vs logo" />
+                <img className="w-14" src="/vs-image.jpg" alt="vs logo" />
               </div>
               <div className="team-vs-team w-2/5">
                 <img
@@ -41,7 +42,7 @@ const MatchCard = ({ cricMatch, showMatchData, className }) => {
             className="btn m-2"
             onClick={() => showMatchData(cricMatch.id)}
           >
-            Show Match Details
+            <Link to={`/matchdetails/${cricMatch.id}`}>Show Match Details</Link>
           </button>
           <p className="font-bold text-lg">{cricMatch?.status}</p>
         </div>
