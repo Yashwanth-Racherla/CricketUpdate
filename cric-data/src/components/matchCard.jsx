@@ -19,7 +19,7 @@ const MatchCard = ({ cricMatch, showMatchData, className }) => {
                 <p> {cricMatch?.teamInfo[0]?.name} </p>
               </div>
               <div className="team-vs-team w-1/5">
-                <img className="w-14" src="./vs image.jpg" alt="vs logo" />
+                <img className="w-14" src="/vs-image.jpg" alt="vs logo" />
               </div>
               <div className="team-vs-team w-2/5">
                 <img
