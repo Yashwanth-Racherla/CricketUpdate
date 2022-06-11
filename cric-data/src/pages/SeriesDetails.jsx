@@ -31,13 +31,11 @@ const SeriesDetails = () => {
   }, []);
 
   return (
-    <div className="p-2 text-sm">
-      <button className="close-popUp">
-        <button onClick={() => navigate(-1)}>
-          <FontAwesomeIcon icon={faXmark} />
-        </button>
+    <div className="px-2 text-sm">
+      <button className="close-button" onClick={() => navigate(-1)}>
+        <FontAwesomeIcon icon={faXmark} />
       </button>
-      <div className="p-2 font-extrabold text-xl sm:text-3xl mt-6">
+      <div className="p-2 font-extrabold text-xl sm:text-3xl">
         <p className="text-center">{seriesData?.data?.info?.name}</p>
       </div>
 

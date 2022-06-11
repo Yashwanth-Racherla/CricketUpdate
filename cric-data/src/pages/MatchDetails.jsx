@@ -38,9 +38,9 @@ const MatchDetails = () => {
   };
 
   return (
-    <div className="p-2 text-sm">
+    <div className="p-2 text-sm ">
       {/* ======= close the pop up button ====== */}
-      <button className="close-popUp" onClick={() => navigate(-1)}>
+      <button className="close-button" onClick={() => navigate(-1)}>
         <FontAwesomeIcon icon={faXmark} />
       </button>
       {/* ======= Match Status ======  */}

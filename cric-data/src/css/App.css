@@ -2,8 +2,8 @@
   @apply bg-gradient-to-r from-[#cc2b5e] to-[#753a88] text-white text-3xl p-4 text-center;
 }
 
-.close-popUp {
-  @apply hover:scale-110 text-3xl fixed top-0 right-[2%];
+.close-button {
+  @apply text-3xl;
 }
 
 .match-data {
