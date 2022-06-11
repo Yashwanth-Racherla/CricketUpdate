@@ -9,11 +9,6 @@ import { getApiKey } from "../helperData/commonData";
 
 const Home = () => {
   const [cricSeriesData, setCricSeriesData] = useState([]);
-  const [cricMatchData, setcricMatchData] = useState(null);
-  const [cricMatchScoreCard, setCricMatchScoreCard] = useState(null);
-  const [activeInningsNum, setActiveInningsNum] = useState(0);
-  const [activeSeriesNum, setActiveSeriesNum] = useState(null);
-
   const apiKey = getApiKey();
 
   //  =================================
@@ -25,24 +20,23 @@ const Home = () => {
       name: "Indian Premier League 2022",
     },
     {
-      id: "b5108aba-0694-42c4-b9eb-8f5eda5a41c7",
-      name: "Srilanka Tour of Bangladesh",
+      id: "9c046ae5-d608-457a-a293-676bc2a9d456",
+      name: "South Africa tour of India 2022",
     },
     {
-      id: "17976dfb-1371-488c-b420-c7d2e2cd7d14",
-      name: "Uganda Tour of Nepal",
+      id: "ca5a2977-f145-484d-9090-5b51090b0408",
+      name: "WestIndies tour of Pakistan",
     },
     {
-      id: "85754fc3-d76e-4afc-9269-e4d49771d80f",
-      namee: "Womens T20 Challenge",
+      id: "a22e9ebf-72d4-4b77-9c76-e00c71dab992",
+      name: "Australia tour of Srilanka",
     },
     {
-      id: "2e4a95c4-a1a4-4ac7-8a98-f549a08ee3c5",
-      namee: "Srilanka Women Tour of Pakistan",
+      id: "32c5461f-74f6-4c68-92f4-ce304ab2c8c0",
+      name: "Newzeland tour of England",
     },
   ];
 
-  // const tempSeriesArr = [];
   const getSeriesData = async () => {
     for (const series of seriesList) {
       const seriesApiData = await fetch(
@@ -51,8 +45,6 @@ const Home = () => {
 
       await seriesApiData.json().then((res) => {
         res.data?.matchList?.sort(byDate);
-        // tempSeriesArr.push(res);
-        // setCricSeriesData(tempSeriesArr);
         setCricSeriesData((prevState) => [...prevState, res]);
       });
     }
@@ -62,27 +54,6 @@ const Home = () => {
     getSeriesData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  // useEffect(() => {
-  //   // setCricSeriesData(tempSeriesArr);
-  //   console.log(tempSeriesArr.length);
-  //   if (tempSeriesArr.length === seriesList.length) console.log("hello");
-  // });
-
-  const showMatchData = async (id) => {
-    const matchApiData = await fetch(
-      `https://api.cricapi.com/v1/match_info?apikey=${apiKey}&offset=0&id=${id}`
-    );
-    const matchScoreCardApiData = await fetch(
-      `https://api.cricapi.com/v1/match_scorecard?apikey=${apiKey}&offset=0&id=${id}`
-    );
-    await matchApiData.json().then((res) => {
-      setcricMatchData(res.data);
-    });
-    await matchScoreCardApiData.json().then((res) => {
-      setCricMatchScoreCard(res.data);
-    });
-  };
 
   return cricSeriesData.map((series, index) => {
     const settings = {
@@ -124,14 +95,13 @@ const Home = () => {
                   key={cricMatch?.id}
                   cricMatch={cricMatch}
                   className="h-full w-full"
-                  showMatchData={showMatchData}
                 />
               );
             })}
         </Slider>
 
         <Link
-          className="btn p-2 my-2 mx-auto inline-block text-blue-600 font-bold text-xl"
+          className="btn my-2 mx-auto block w-60 text-center text-blue-600 font-bold text-xl"
           to={`/seriesdetails/${series?.data?.info?.id}`}
         >
           Show Series Details
