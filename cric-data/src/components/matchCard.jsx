@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const MatchCard = ({ cricMatch, showMatchData, className }) => {
+const MatchCard = ({ cricMatch, className }) => {
   return (
     <>
       <div className={`match-data ${className}`}>
@@ -36,15 +36,15 @@ const MatchCard = ({ cricMatch, showMatchData, className }) => {
         )}
 
         <div>
-          <p>{new Date(cricMatch?.dateTimeGMT).toDateString()}</p>
+          <p className="mb-2">
+            {new Date(cricMatch?.dateTimeGMT).toDateString()}
+          </p>
 
-          <button
-            className="btn m-2"
-            onClick={() => showMatchData(cricMatch.id)}
-          >
-            <Link to={`/matchdetails/${cricMatch.id}`}>Show Match Details</Link>
-          </button>
-          <p className="font-bold text-lg">{cricMatch?.status}</p>
+          <Link className="btn" to={`/matchdetails/${cricMatch.id}`}>
+            Show Match Details
+          </Link>
+
+          <p className="font-bold text-lg mt-2">{cricMatch?.status}</p>
         </div>
       </div>
     </>
