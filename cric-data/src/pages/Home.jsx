@@ -20,12 +20,12 @@ const Home = () => {
       name: "Indian Premier League 2022",
     },
     {
-      id: "9c046ae5-d608-457a-a293-676bc2a9d456",
-      name: "South Africa tour of India 2022",
+      id: "bf98268d-af44-4258-8f0d-f894a84d7820",
+      name: "India tour of Ireland 2022",
     },
     {
-      id: "ca5a2977-f145-484d-9090-5b51090b0408",
-      name: "WestIndies tour of Pakistan",
+      id: "c39aa92c-2fd9-4676-be5a-84655daebac4",
+      name: "Vitality Blast 2022",
     },
     {
       id: "a22e9ebf-72d4-4b77-9c76-e00c71dab992",
