@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import MatchCard from "../components/matchCard";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import MatchCard from "../components/MatchCard";
 import { Link } from "react-router-dom";
 import { byDate } from "../helperFunctions/commonFunctions";
 import { getApiKey } from "../helperData/commonData";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const Home = () => {
   const [cricSeriesData, setCricSeriesData] = useState([]);
@@ -20,8 +20,8 @@ const Home = () => {
       name: "Indian Premier League 2022",
     },
     {
-      id: "bf98268d-af44-4258-8f0d-f894a84d7820",
-      name: "India tour of Ireland 2022",
+      id: "88650923-87d7-4cf4-9032-1b7b71f1027a",
+      name: "India tour of England 2022",
     },
     {
       id: "c39aa92c-2fd9-4676-be5a-84655daebac4",
@@ -79,7 +79,7 @@ const Home = () => {
       ],
     };
     return (
-      <div key={`series-${index}`} className="mb-4">
+      <div key={index} className="mb-4">
         <div className="p-2 font-extrabold text-xl sm:text-3xl">
           <p className="text-center">{series?.data?.info?.name}</p>
         </div>
