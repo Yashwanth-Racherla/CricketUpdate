@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import MatchCard from "../components/matchCard";
+import MatchCard from "../components/MatchCard";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { byDate, byDateRev } from "../helperFunctions/commonFunctions";
