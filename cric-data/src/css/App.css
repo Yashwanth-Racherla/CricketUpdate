@@ -15,7 +15,7 @@
 
 .btn {
   background-image: linear-gradient(135deg, #e32d76 0%, #648fe6 100%);
-  @apply text-white px-4 py-2 font-bold border-[1px] border-collapse border-black rounded-xl;
+  @apply text-white px-4 py-2 my-2 font-bold border-[1px] border-black rounded-xl;
 }
 
 .slick-slider {
