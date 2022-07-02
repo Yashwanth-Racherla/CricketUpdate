@@ -51,7 +51,7 @@ const MatchDetails = () => {
           return (
             <button
               key={teamScoreCard.inning}
-              className="w-1/2 btn flex flex-col items-center justify-between font-bold sm:text-base"
+              className="w-1/2 button flex flex-col items-center justify-between font-bold sm:text-base"
               onClick={() => showScoreCard(index)}
             >
               <span>{teamScoreCard.inning.replace("Inning 1", "")}</span>

@@ -37,7 +37,7 @@ const MatchCard = ({ cricMatch, className }) => {
       <div className="flex flex-col items-center">
         <p>{new Date(cricMatch?.dateTimeGMT).toDateString()}</p>
 
-        <Link className="btn" to={`/matchdetails/${cricMatch.id}`}>
+        <Link className="button" to={`/matchdetails/${cricMatch.id}`}>
           Show Match Details
         </Link>
 

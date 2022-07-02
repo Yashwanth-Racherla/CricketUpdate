@@ -101,7 +101,7 @@ const Home = () => {
         </Slider>
 
         <Link
-          className="btn my-2 mx-auto block w-60 text-center text-blue-600 font-bold text-xl"
+          className="button my-2 mx-auto block w-60 text-center text-blue-600 font-bold text-xl"
           to={`/seriesdetails/${series?.data?.info?.id}`}
         >
           Show Series Details
