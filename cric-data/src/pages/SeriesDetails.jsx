@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import MatchCard from "../components/MatchCard";
 import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
@@ -32,8 +30,8 @@ const SeriesDetails = () => {
 
   return (
     <div className="px-2 text-sm">
-      <button className="close-button" onClick={() => navigate(-1)}>
-        <FontAwesomeIcon icon={faXmark} />
+      <button className="close-button " onClick={() => navigate(-1)}>
+        <ion-icon class="w-9 h-9" name="close-outline"></ion-icon>
       </button>
       <div className="p-2 font-extrabold text-xl sm:text-3xl">
         <p className="text-center">{seriesData?.data?.info?.name}</p>

@@ -1,21 +1,24 @@
+body {
+  @apply mt-20;
+}
 .header {
-  @apply bg-gradient-to-r from-[#cc2b5e] to-[#753a88] text-white text-3xl p-4 text-center;
+  @apply fixed z-10 w-full h-20 top-0 flex items-center justify-center text-white text-3xl font-bold bg-gradient-to-r from-[#cc2b5e] to-[#753a88];
 }
 .footer {
-  @apply bg-gradient-to-r from-[#cc2b5e] to-[#753a88] text-white text-center text-xs md:text-sm  xl:text-base py-6;
-}
-
-.close-button {
-  @apply text-3xl;
-}
-
-.match-card {
-  @apply border-[3px] border-[#777777] p-5 text-center font-semibold;
+  @apply h-20 flex items-center justify-center text-white text-center bg-gradient-to-r from-[#cc2b5e] to-[#753a88];
 }
 
 .button {
   background-image: linear-gradient(135deg, #e32d76 0%, #648fe6 100%);
   @apply text-white px-4 py-2 my-2 font-bold border-[1px];
+}
+
+.close-button {
+  @apply w-10 h-10 border-2 border-black absolute top-24 right-5;
+}
+
+.match-card {
+  @apply border-[3px] border-[#777777] p-5 text-center font-semibold;
 }
 
 .slick-slider {
