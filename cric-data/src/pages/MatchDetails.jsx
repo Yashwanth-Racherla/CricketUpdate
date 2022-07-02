@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
-import MatchScorecard from "../components/matchScorecard";
+import MatchScorecard from "../components/MatchScorecard";
 import { useNavigate, useParams } from "react-router-dom";
 import { getApiKey } from "../helperData/commonData";
 
