@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getApiKey } from "../helperData/commonData";
 
 const MatchDetails = () => {
-  const { id } = useParams();
+  const { matchId } = useParams();
   const apiKey = getApiKey();
   const navigate = useNavigate();
   const [matchInfo, setMatchInfo] = useState(null);
@@ -13,17 +13,16 @@ const MatchDetails = () => {
 
   const showMatchData = async () => {
     const getMatchInfo = await fetch(
-      `https://api.cricapi.com/v1/match_info?apikey=${apiKey}&offset=0&id=${id}`
+      `https://api.cricapi.com/v1/match_info?apikey=${apiKey}&offset=0&id=${matchId}`
     );
     const getMatchScoreCard = await fetch(
-      `https://api.cricapi.com/v1/match_scorecard?apikey=${apiKey}&offset=0&id=${id}`
+      `https://api.cricapi.com/v1/match_scorecard?apikey=${apiKey}&offset=0&id=${matchId}`
     );
     await getMatchInfo.json().then((res) => {
       setMatchInfo(res.data);
     });
     await getMatchScoreCard.json().then((res) => {
       setMatchScoreCard(res.data);
-      // console.log(res);
     });
   };
   useEffect(() => {
