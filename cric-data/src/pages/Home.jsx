@@ -80,9 +80,10 @@ const Home = () => {
     };
     return (
       <div key={index} className="mb-4">
-        <div className="p-2 font-extrabold text-xl sm:text-3xl">
-          <p className="text-center">{series?.data?.info?.name}</p>
-        </div>
+        <p className="p-2 font-extrabold text-xl sm:text-3xl text-center">
+          {series?.data?.info?.name}
+        </p>
+
         <Slider {...settings}>
           {series?.data?.matchList
             ?.filter((cricMatch) => {
