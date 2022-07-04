@@ -27,7 +27,7 @@ const Home = () => {
       name: "Australia tour of Srilanka",
     },
     {
-      id: "d93d6523-287f-4a2c-bb64-edd256a93748",
+      id: "a943264f-7b01-49f1-9522-dda25aef1b5a",
       name: "Bangladesh tour of WestIndies",
     },
     {
@@ -64,6 +64,8 @@ const Home = () => {
     <Loading />
   ) : (
     cricSeriesData.map((series, index) => {
+      // console.log(series);
+
       const settings = {
         infinite: false,
         speed: 500,
@@ -111,7 +113,7 @@ const Home = () => {
 
           <button className="button mx-auto block font-bold text-xl">
             <Link to={`/seriesdetails/${series?.data?.info?.id}`}>
-              Show Series Details
+              Series Details
             </Link>
           </button>
         </div>

@@ -2,15 +2,15 @@ body {
   @apply mt-20;
 }
 .header {
-  @apply fixed z-10 w-full h-20 top-0 flex items-center justify-center text-white text-3xl font-bold bg-gradient-to-r from-[#cc2b5e] to-[#753a88];
+  @apply fixed z-10 w-full h-20 top-0 flex items-center justify-center text-white text-3xl font-bold bg-black;
 }
 .footer {
-  @apply h-20 flex items-center justify-center text-white text-center bg-gradient-to-r from-[#cc2b5e] to-[#753a88];
+  @apply h-20 flex items-center justify-center text-white text-center bg-black;
 }
 
 .button {
-  background-image: linear-gradient(135deg, #e32d76 0%, #648fe6 100%);
-  @apply text-white px-4 py-2 my-2 font-bold border-2 border-black rounded-full;
+  /* background-image: linear-gradient(135deg, #e32d76 0%, #648fe6 100%); */
+  @apply bg-[#555555] text-white px-4 py-2 my-2 font-bold border-2 border-black rounded-full;
 }
 .button:hover {
   @apply rounded-full;

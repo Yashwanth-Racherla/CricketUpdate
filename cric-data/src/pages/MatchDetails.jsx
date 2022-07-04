@@ -23,9 +23,11 @@ const MatchDetails = () => {
     await getMatchInfo.json().then((res) => {
       setMatchInfo(res.data);
     });
+    console.log(matchInfo);
     await getMatchScoreCard.json().then((res) => {
       setMatchScoreCard(res.data);
     });
+    console.log(matchScoreCard);
     setIsLoading(false);
   };
   useEffect(() => {
