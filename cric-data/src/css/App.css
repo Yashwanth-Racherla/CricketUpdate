@@ -10,7 +10,10 @@ body {
 
 .button {
   background-image: linear-gradient(135deg, #e32d76 0%, #648fe6 100%);
-  @apply text-white px-4 py-2 my-2 font-bold border-[1px];
+  @apply text-white px-4 py-2 my-2 font-bold border-2 border-black rounded-full;
+}
+.button:hover {
+  @apply rounded-full;
 }
 
 .close-button {

@@ -19,24 +19,25 @@ const Home = () => {
   //  =================================
   const seriesList = [
     {
-      id: "47b54677-34de-4378-9019-154e82b9cc1a",
-      name: "Indian Premier League 2022",
-    },
-    {
       id: "88650923-87d7-4cf4-9032-1b7b71f1027a",
       name: "India tour of England 2022",
-    },
-    {
-      id: "c39aa92c-2fd9-4676-be5a-84655daebac4",
-      name: "Vitality Blast 2022",
     },
     {
       id: "a22e9ebf-72d4-4b77-9c76-e00c71dab992",
       name: "Australia tour of Srilanka",
     },
     {
-      id: "32c5461f-74f6-4c68-92f4-ce304ab2c8c0",
-      name: "Newzeland tour of England",
+      id: "d93d6523-287f-4a2c-bb64-edd256a93748",
+      name: "Bangladesh tour of WestIndies",
+    },
+    {
+      id: "c39aa92c-2fd9-4676-be5a-84655daebac4",
+      name: "Vitality Blast 2022",
+    },
+
+    {
+      id: "47b54677-34de-4378-9019-154e82b9cc1a",
+      name: "Indian Premier League 2022",
     },
   ];
 
