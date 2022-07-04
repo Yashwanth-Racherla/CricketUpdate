@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import MatchScorecard from "../components/MatchScorecard";
 import { useNavigate, useParams } from "react-router-dom";
 import { getApiKey } from "../helperData/commonData";
+import Loading from "../components/Loading";
 
 const MatchDetails = () => {
   const { matchId } = useParams();
@@ -10,6 +11,7 @@ const MatchDetails = () => {
   const [matchInfo, setMatchInfo] = useState(null);
   const [matchScoreCard, setMatchScoreCard] = useState(null);
   const [inningsNum, setInningsNum] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
 
   const showMatchData = async () => {
     const getMatchInfo = await fetch(
@@ -24,6 +26,7 @@ const MatchDetails = () => {
     await getMatchScoreCard.json().then((res) => {
       setMatchScoreCard(res.data);
     });
+    setIsLoading(false);
   };
   useEffect(() => {
     showMatchData();
@@ -34,7 +37,9 @@ const MatchDetails = () => {
     setInningsNum(id);
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="text-sm">
       {/* ======= close button ====== */}
       <button className="close-button " onClick={() => navigate(-1)}>
@@ -57,7 +62,7 @@ const MatchDetails = () => {
                 <span>{teamScoreCard.inning.replace("Inning 1", "")}</span>
                 <span>
                   {`${teamScoreCard.totals?.R}/${teamScoreCard.totals?.W}
-                        (${teamScoreCard.totals?.O})`}
+                    (${teamScoreCard.totals?.O})`}
                 </span>
               </button>
             );
