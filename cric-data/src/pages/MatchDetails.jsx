@@ -23,11 +23,9 @@ const MatchDetails = () => {
     await getMatchInfo.json().then((res) => {
       setMatchInfo(res.data);
     });
-    console.log(matchInfo);
     await getMatchScoreCard.json().then((res) => {
       setMatchScoreCard(res.data);
     });
-    console.log(matchScoreCard);
     setIsLoading(false);
   };
   useEffect(() => {
@@ -44,11 +42,16 @@ const MatchDetails = () => {
   ) : (
     <div className="text-sm">
       {/* ======= close button ====== */}
-      <button className="close-button " onClick={() => navigate(-1)}>
-        <ion-icon class="w-9 h-9" name="close-outline"></ion-icon>
-      </button>
+      <div className="fixed top-16 text-right h-16 left-0 w-full px-[2%] pt-2 bg-[#FFF2F0]">
+        <button className="close-button " onClick={() => navigate(-1)}>
+          <ion-icon
+            class=" w-5 h-5 md:w-9 md:h-9"
+            name="close-outline"
+          ></ion-icon>
+        </button>
+      </div>
       {/* ======= Match Status ======  */}
-      <div className="px-2 pt-16">
+      <div className="px-2 pt-24">
         <h2 className="font-bold py-4 text-lg sm:text-xl">
           {matchInfo?.status}
         </h2>
@@ -58,7 +61,9 @@ const MatchDetails = () => {
             return (
               <button
                 key={teamScoreCard.inning}
-                className="button flex flex-col items-center justify-between font-bold sm:text-base"
+                className={`button button-scorecard flex flex-col items-center justify-between font-bold sm:text-base ${
+                  inningsNum === index && "active"
+                }`}
                 onClick={() => showScoreCard(index)}
               >
                 <span>{teamScoreCard.inning.replace("Inning 1", "")}</span>
@@ -93,7 +98,11 @@ const MatchDetails = () => {
               </div>
               <div className="flex ">
                 <p className="shrink-0">{`Toss : `}</p>
-                <p>{`${matchInfo?.tossWinner} won the toss and opted to ${matchInfo?.tossChoice} first`}</p>
+                <p>
+                  {matchInfo?.tossWinner !== undefined
+                    ? `${matchInfo?.tossWinner} won the toss and opted to ${matchInfo?.tossChoice} first`
+                    : "Match not started"}
+                </p>
               </div>
             </div>
           </div>
