@@ -50,7 +50,7 @@ const MatchCard = ({ cricMatch, className }) => {
         <p>{new Date(cricMatch?.dateTimeGMT).toDateString()}</p>
 
         <Link className="button" to={`/matchdetails/${cricMatch.id}`}>
-          Show Match Details
+          Scorecard
         </Link>
 
         <p className="font-bold text-lg">{cricMatch?.status}</p>
