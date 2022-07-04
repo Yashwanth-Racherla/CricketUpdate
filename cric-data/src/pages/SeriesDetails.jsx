@@ -35,9 +35,14 @@ const SeriesDetails = () => {
     <Loading />
   ) : (
     <div className="text-sm px-2 py-16">
-      <button className="close-button " onClick={() => navigate(-1)}>
-        <ion-icon class="w-9 h-9" name="close-outline"></ion-icon>
-      </button>
+      <div className="fixed top-16 text-right h-16 left-0 w-full px-[2%] pt-2 bg-[#FFF2F0]">
+        <button className="close-button " onClick={() => navigate(-1)}>
+          <ion-icon
+            class=" w-5 h-5 md:w-9 md:h-9"
+            name="close-outline"
+          ></ion-icon>
+        </button>
+      </div>
       <h2 className="font-bold text-center text-xl sm:text-2xl lg:text-4xl pb-4">
         {seriesData?.data?.info?.name}
       </h2>

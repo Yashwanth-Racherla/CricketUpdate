@@ -1,23 +1,27 @@
 body {
-  @apply mt-20;
+  @apply mt-16;
 }
 .header {
-  @apply fixed z-10 w-full h-20 top-0 flex items-center justify-center text-white text-3xl font-bold bg-black;
+  @apply fixed z-10 w-full h-16 top-0 flex items-center justify-center text-white text-3xl font-bold bg-[black];
 }
 .footer {
-  @apply h-20 flex items-center justify-center text-white text-center bg-black;
+  @apply flex items-center justify-center text-white text-center bg-black p-4;
 }
 
 .button {
   /* background-image: linear-gradient(135deg, #e32d76 0%, #648fe6 100%); */
-  @apply bg-[#555555] text-white px-4 py-2 my-2 font-bold border-2 border-black rounded-full;
+  @apply bg-[#555555] text-white px-4 py-1 my-2 font-bold border-2 border-black rounded-lg;
 }
-.button:hover {
-  @apply rounded-full;
+
+.button-scorecard {
+  @apply bg-[#FFF2F0] text-black;
+}
+.button-scorecard.active {
+  @apply bg-[#555555] text-white;
 }
 
 .close-button {
-  @apply w-10 h-10 border-2 border-black absolute top-24 right-5;
+  @apply w-6 h-6 md:w-10 md:h-10 border-2 border-black;
 }
 
 .match-card {
@@ -44,6 +48,6 @@ body {
 }
 
 .loading {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 64px);
   @apply w-full flex justify-center items-center;
 }
