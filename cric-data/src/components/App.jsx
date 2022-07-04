@@ -8,7 +8,7 @@ import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <div className="bg-[#f2f4fc]">
+    <div className="bg-[#FFF2F0]">
       <Header />
       <div className="sm:w-4/5 max-w-[1200px] mx-auto ">
         <Routes>
