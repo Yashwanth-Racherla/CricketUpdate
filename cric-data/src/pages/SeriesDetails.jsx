@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { byDate, byDateRev } from "../helperFunctions/commonFunctions";
 import { getApiKey } from "../helperData/commonData";
+import Loading from "../components/Loading";
 
 const SeriesDetails = () => {
   const navigate = useNavigate();
@@ -11,6 +12,7 @@ const SeriesDetails = () => {
   const apiKey = getApiKey();
 
   const [seriesData, setSeriesData] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   const getSeriesData = async () => {
     const seriesApiData = await fetch(
@@ -20,6 +22,7 @@ const SeriesDetails = () => {
     await seriesApiData.json().then((res) => {
       res.data?.matchList?.sort(byDate);
       setSeriesData(res);
+      setIsLoading(false);
     });
   };
 
@@ -28,7 +31,9 @@ const SeriesDetails = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <div className="text-sm">
       <button className="close-button " onClick={() => navigate(-1)}>
         <ion-icon class="w-9 h-9" name="close-outline"></ion-icon>

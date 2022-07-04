@@ -39,3 +39,8 @@ body {
 .slick-slider .slick-slide > div {
   @apply h-full;
 }
+
+.loading {
+  height: calc(100vh - 160px);
+  @apply w-full flex justify-center items-center;
+}

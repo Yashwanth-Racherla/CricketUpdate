@@ -6,9 +6,12 @@ import { getApiKey } from "../helperData/commonData";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Loading from "../components/Loading";
 
 const Home = () => {
   const [cricSeriesData, setCricSeriesData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const apiKey = getApiKey();
 
   //  =================================
@@ -48,6 +51,7 @@ const Home = () => {
         setCricSeriesData((prevState) => [...prevState, res]);
       });
     }
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -55,60 +59,64 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return cricSeriesData.map((series, index) => {
-    const settings = {
-      infinite: false,
-      speed: 500,
-      slidesToShow: 3,
-      slidesToScroll: 1,
-      responsive: [
-        {
-          breakpoint: 1200,
-          settings: {
-            slidesToShow: 2,
-            slidesToScroll: 1,
+  return isLoading ? (
+    <Loading />
+  ) : (
+    cricSeriesData.map((series, index) => {
+      const settings = {
+        infinite: false,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        responsive: [
+          {
+            breakpoint: 1200,
+            settings: {
+              slidesToShow: 2,
+              slidesToScroll: 1,
+            },
           },
-        },
-        {
-          breakpoint: 700,
-          settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
+          {
+            breakpoint: 700,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+            },
           },
-        },
-      ],
-    };
-    return (
-      <div key={index} className="mb-4">
-        <p className="p-2 font-extrabold text-xl sm:text-3xl text-center">
-          {series?.data?.info?.name}
-        </p>
+        ],
+      };
+      return (
+        <div key={index} className="mb-4">
+          <p className="p-2 font-extrabold text-xl sm:text-3xl text-center">
+            {series?.data?.info?.name}
+          </p>
 
-        <Slider {...settings}>
-          {series?.data?.matchList
-            ?.filter((cricMatch) => {
-              return cricMatch.status !== "Match not started";
-            })
-            .slice(0, 5)
-            .map((cricMatch) => {
-              return (
-                <MatchCard
-                  key={cricMatch?.id}
-                  cricMatch={cricMatch}
-                  className="h-full w-full"
-                />
-              );
-            })}
-        </Slider>
+          <Slider {...settings}>
+            {series?.data?.matchList
+              ?.filter((cricMatch) => {
+                return cricMatch.status !== "Match not started";
+              })
+              .slice(0, 5)
+              .map((cricMatch) => {
+                return (
+                  <MatchCard
+                    key={cricMatch?.id}
+                    cricMatch={cricMatch}
+                    className="h-full w-full"
+                  />
+                );
+              })}
+          </Slider>
 
-        <button className="button mx-auto block font-bold text-xl">
-          <Link to={`/seriesdetails/${series?.data?.info?.id}`}>
-            Show Series Details
-          </Link>
-        </button>
-      </div>
-    );
-  });
+          <button className="button mx-auto block font-bold text-xl">
+            <Link to={`/seriesdetails/${series?.data?.info?.id}`}>
+              Show Series Details
+            </Link>
+          </button>
+        </div>
+      );
+    })
+  );
 };
 
 export default Home;
