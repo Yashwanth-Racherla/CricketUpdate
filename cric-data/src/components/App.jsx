@@ -8,15 +8,17 @@ import { Routes, Route } from "react-router-dom";
 
 const App = () => {
   return (
-    <>
+    <div className="bg-[#f2f4fc]">
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/seriesdetails/:seriesId" element={<SeriesDetails />} />
-        <Route path="/matchdetails/:matchId" element={<MatchDetails />} />
-      </Routes>
+      <div className="sm:w-4/5 max-w-[1200px] mx-auto ">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/seriesdetails/:seriesId" element={<SeriesDetails />} />
+          <Route path="/matchdetails/:matchId" element={<MatchDetails />} />
+        </Routes>
+      </div>
       <Footer />
-    </>
+    </div>
   );
 };
 
