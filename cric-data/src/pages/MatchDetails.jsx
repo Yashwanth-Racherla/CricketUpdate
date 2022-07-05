@@ -42,7 +42,7 @@ const MatchDetails = () => {
   ) : (
     <div className="text-sm">
       {/* ======= close button ====== */}
-      <div className="fixed top-16 text-right h-16 left-0 w-full px-[2%] pt-2 bg-[#FFF2F0]">
+      <div className="fixed top-16 text-right h-12 md:h-14 left-0 w-full px-[2%] pt-2 bg-[#FFF2F0]">
         <button className="close-button " onClick={() => navigate(-1)}>
           <ion-icon
             class=" w-5 h-5 md:w-9 md:h-9"
@@ -51,17 +51,17 @@ const MatchDetails = () => {
         </button>
       </div>
       {/* ======= Match Status ======  */}
-      <div className="px-2 pt-24">
+      <div className="px-2 pt-14 md:pt-20">
         <h2 className="font-bold py-4 text-lg sm:text-xl">
           {matchInfo?.status}
         </h2>
         {/* ===== Team Names ====== */}
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-1">
           {matchScoreCard?.scorecard?.map((teamScoreCard, index) => {
             return (
               <button
                 key={teamScoreCard.inning}
-                className={`button button-scorecard flex flex-col items-center justify-between font-bold sm:text-base ${
+                className={`button button-scorecard ${
                   inningsNum === index && "active"
                 }`}
                 onClick={() => showScoreCard(index)}

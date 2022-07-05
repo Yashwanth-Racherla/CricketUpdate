@@ -14,10 +14,13 @@ body {
 }
 
 .button-scorecard {
-  @apply bg-[#FFF2F0] text-black;
+  @apply bg-[#FFF2F0] text-black flex flex-col items-center justify-between font-bold sm:text-base my-0;
+}
+.button-scorecard:hover {
+  @apply bg-gray-500 text-[#FFF2F0];
 }
 .button-scorecard.active {
-  @apply bg-[#555555] text-white;
+  @apply bg-gray-700 text-[#FFF2F0];
 }
 
 .close-button {
