@@ -19,8 +19,8 @@ const Home = () => {
   //  =================================
   const seriesList = [
     {
-      id: "88650923-87d7-4cf4-9032-1b7b71f1027a",
-      name: "India tour of England 2022",
+      id: "b290fb86-aae9-4284-9a52-854a8c4fe19c",
+      name: "India Women tour of Srilanka 2022",
     },
     {
       id: "a22e9ebf-72d4-4b77-9c76-e00c71dab992",
