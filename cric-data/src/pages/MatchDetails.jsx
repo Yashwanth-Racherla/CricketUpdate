@@ -26,6 +26,7 @@ const MatchDetails = () => {
     await getMatchScoreCard.json().then((res) => {
       setMatchScoreCard(res.data);
     });
+    console.log(matchScoreCard);
     setIsLoading(false);
   };
   useEffect(() => {
@@ -66,7 +67,13 @@ const MatchDetails = () => {
                 }`}
                 onClick={() => showScoreCard(index)}
               >
-                <span>{teamScoreCard.inning.replace("Inning 1", "")}</span>
+                <span>
+                  {matchScoreCard.matchType === "test"
+                    ? teamScoreCard.inning
+                        .replace("Inning 1", "1st Innings")
+                        .replace("Inning 2", "2nd Innings")
+                    : teamScoreCard.inning.replace("Inning 1", "")}
+                </span>
                 <span>
                   {`${teamScoreCard.totals?.R}/${teamScoreCard.totals?.W}
                     (${teamScoreCard.totals?.O})`}
