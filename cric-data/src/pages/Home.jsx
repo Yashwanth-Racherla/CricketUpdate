@@ -19,16 +19,16 @@ const Home = () => {
   //  =================================
   const seriesList = [
     {
-      id: "b290fb86-aae9-4284-9a52-854a8c4fe19c",
-      name: "India Women tour of Srilanka 2022",
+      id: "de644e14-30f5-45f3-a773-0785380bdfd6",
+      name: "Asia Cup 2022",
     },
     {
-      id: "a22e9ebf-72d4-4b77-9c76-e00c71dab992",
-      name: "Australia tour of Srilanka",
+      id: "ead2508e-a8cf-4e72-a6d8-d2728991a7b1",
+      name: "The Hundred Mens Competition 2022",
     },
     {
-      id: "a943264f-7b01-49f1-9522-dda25aef1b5a",
-      name: "Bangladesh tour of WestIndies",
+      id: "932bbc99-ffc1-4020-b187-c298e6f4cd00",
+      name: "The Hundred Womens Competition 2022",
     },
     {
       id: "c39aa92c-2fd9-4676-be5a-84655daebac4",
