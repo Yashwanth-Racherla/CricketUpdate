@@ -19,6 +19,14 @@ const Home = () => {
   //  =================================
   const seriesList = [
     {
+      id: "aa322c91-59b8-4aa3-81ca-69eede967062",
+      name: "Road Safety World Series 2022",
+    },
+    {
+      id: "d4712f5a-6360-4460-994a-f78c16340a13",
+      name: "Australia Tour Of India 2022",
+    },
+    {
       id: "de644e14-30f5-45f3-a773-0785380bdfd6",
       name: "Asia Cup 2022",
     },
@@ -34,7 +42,6 @@ const Home = () => {
       id: "c39aa92c-2fd9-4676-be5a-84655daebac4",
       name: "Vitality Blast 2022",
     },
-
     {
       id: "47b54677-34de-4378-9019-154e82b9cc1a",
       name: "Indian Premier League 2022",
