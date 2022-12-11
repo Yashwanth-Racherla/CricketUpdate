@@ -19,13 +19,21 @@ const Home = () => {
   //  =================================
   const seriesList = [
     {
-      id: "aa322c91-59b8-4aa3-81ca-69eede967062",
-      name: "Road Safety World Series 2022",
+      id:"37455adf-e34d-4d39-aee7-526675824d7f",
+      name:"Australia Women tour of India 2022"
     },
     {
-      id: "d4712f5a-6360-4460-994a-f78c16340a13",
-      name: "Australia Tour Of India 2022",
+      id:"7206be3f-c813-41fd-857a-eb97a654b84d",
+      name:"India tour of Bangladesh 2022"
     },
+    // {
+    //   id: "aa322c91-59b8-4aa3-81ca-69eede967062",
+    //   name: "Road Safety World Series 2022",
+    // },
+    // {
+    //   id: "d4712f5a-6360-4460-994a-f78c16340a13",
+    //   name: "Australia Tour Of India 2022",
+    // },
     {
       id: "de644e14-30f5-45f3-a773-0785380bdfd6",
       name: "Asia Cup 2022",
