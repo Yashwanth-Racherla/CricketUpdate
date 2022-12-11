@@ -13,23 +13,18 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const apiKey = getApiKey();
-  
 
   //  =================================
   //  Multiple Series Fetching Api
   //  =================================
-  const seriesList = [    
+  const seriesList = [
     {
-      id:"7206be3f-c813-41fd-857a-eb97a654b84d",
-      name: "India Tour Of Bangladesh, 2022"
+      id: "aa322c91-59b8-4aa3-81ca-69eede967062",
+      name: "Road Safety World Series 2022",
     },
     {
-      id: "6e9c3ee5-acbb-4168-906b-dda3fb5b4acd",
-      name: "Australia Women Tour Of India 2022",
-    },
-    {
-      id: "a473e7ce-9a31-4122-b06c-4d4f96dc16db",
-      name: "ICC Mens T20 World Cup 2022",
+      id: "d4712f5a-6360-4460-994a-f78c16340a13",
+      name: "Australia Tour Of India 2022",
     },
     {
       id: "de644e14-30f5-45f3-a773-0785380bdfd6",
@@ -38,6 +33,10 @@ const Home = () => {
     {
       id: "ead2508e-a8cf-4e72-a6d8-d2728991a7b1",
       name: "The Hundred Mens Competition 2022",
+    },
+    {
+      id: "932bbc99-ffc1-4020-b187-c298e6f4cd00",
+      name: "The Hundred Womens Competition 2022",
     },
     {
       id: "c39aa92c-2fd9-4676-be5a-84655daebac4",
